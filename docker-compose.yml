@@ -1,7 +1,7 @@
 services:
   mongodb:
     image: mongo:latest
-    container_name: flow-db
+    container_name: txio-db
     ports:
       - "27017:27017"
     volumes:
@@ -11,9 +11,9 @@ services:
     build:
       context: ./backend
       dockerfile: api/Dockerfile
-    container_name: flow-api
+    container_name: txio-api
     environment:
-      MONGO_URI: mongodb://mongodb:27017/flow
+      MONGO_URI: mongodb://mongodb:27017/txio
       RUST_LOG: info
     ports:
       - "3000:3000"
@@ -24,7 +24,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: flow-frontend
+    container_name: txio-frontend
     ports:
       - "5173:5173"
     environment:

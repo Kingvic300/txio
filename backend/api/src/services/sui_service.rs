@@ -10,7 +10,6 @@ use mongodb::bson::oid::ObjectId;
 pub struct SuiService {
     rpc_repo: RpcRepository,
     client: Client,
-    rpc_url: String,
 }
 
 #[derive(serde::Serialize)]
@@ -31,11 +30,10 @@ struct JsonRpcResponse {
 }
 
 impl SuiService {
-    pub fn new(rpc_repo: RpcRepository, rpc_url: String) -> Self {
+    pub fn new(rpc_repo: RpcRepository, _rpc_url: String) -> Self {
         Self {
             rpc_repo,
             client: Client::new(),
-            rpc_url,
         }
     }
 

@@ -1,7 +1,7 @@
-use serde::{Deserialize};
+use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-#[derive(Debug, Deserialize, Validate)]
+#[derive(Debug, Deserialize, Serialize, Validate)]
 pub struct RegisterUserRequest {
     #[validate(email)]
     pub email: String,
@@ -9,7 +9,7 @@ pub struct RegisterUserRequest {
     pub password: String,
 }
 
-#[derive(Debug, Deserialize, Validate)]
+#[derive(Debug, Deserialize, Serialize, Validate)]
 pub struct LoginRequest {
     #[validate(email)]
     pub email: String,

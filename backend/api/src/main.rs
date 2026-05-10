@@ -2,16 +2,11 @@ use axum::{routing::get, Router};
 use std::net::SocketAddr;
 use dotenvy::dotenv;
 
-use crate::api;
-use crate::dtos;
-use crate::services;
-use crate::model;
-use crate::repositories;
-use crate::infra;
-use crate::utils;
-
-use crate::utils::config::Config;
-use crate::infra::db::establish_connection;
+use ::txio_api::{
+    api, services, model, repositories, utils,
+    utils::config::Config,
+    infra::db::establish_connection,
+};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

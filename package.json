@@ -1,8 +1,8 @@
 {
-  "name": "flow-monorepo",
+  "name": "txio-monorepo",
   "private": true,
   "scripts": {
-    "dev:backend": "cd backend && cargo run --package api",
+    "dev:backend": "cd backend/api && cargo run",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:desktop": "cd desktop && npm start",
     "build": "npm run build --workspaces",
