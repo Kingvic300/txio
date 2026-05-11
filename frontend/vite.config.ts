@@ -18,9 +18,15 @@ export default defineConfig(({ mode }) => {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
       },
+      optimizeDeps: {
+        include: ['react', 'react-dom', 'react/jsx-runtime', 'framer-motion']
+      },
       resolve: {
         alias: {
           '@': path.resolve(__dirname, './src'),
+          'react': path.resolve(__dirname, './node_modules/react'),
+          'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+          'react/jsx-runtime': path.resolve(__dirname, './node_modules/react/jsx-runtime'),
         }
       }
     };

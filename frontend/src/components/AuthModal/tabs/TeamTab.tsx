@@ -18,15 +18,15 @@ export const TeamTab: React.FC<TeamTabProps> = ({ teamMembers = [] }) => {
         </div>
         <button 
           onClick={() => appStore.showToast('Invite txio not implemented', 'info')} 
-          className="px-3 py-1.5 bg-sui-600 hover:bg-sui-500 text-white text-xs font-bold rounded flex items-center gap-2"
+          className="px-3 py-1.5 bg-electric-violet hover:bg-electric-violet text-white text-xs font-bold rounded flex items-center gap-2"
         >
           <Plus size={14} /> <span className="hidden sm:inline">Invite Member</span>
         </button>
       </div>
 
-      <div className="border border-slate-800 rounded-lg overtxio-x-auto bg-slate-950">
+      <div className="border border-white/5 rounded-lg overflow-x-auto bg-near-black">
         <table className="w-full text-left text-sm min-w-[500px]">
-          <thead className="bg-slate-900 border-b border-slate-800 text-xs text-slate-500 uppercase font-medium">
+          <thead className="bg-dark-indigo-glow border-b border-white/5 text-xs text-slate-500 uppercase font-medium">
             <tr>
               <th className="px-4 py-3">User</th>
               <th className="px-4 py-3">Role</th>
@@ -36,7 +36,7 @@ export const TeamTab: React.FC<TeamTabProps> = ({ teamMembers = [] }) => {
           </thead>
           <tbody className="divide-y divide-slate-800">
             {teamMembers.map((member) => (
-              <tr key={member.id} className="group hover:bg-slate-900/50 transition-colors">
+              <tr key={member.id} className="group hover:bg-dark-indigo-glow/50 transition-colors">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <Avatar size="sm" type={member.name.includes('AI') ? 'bot' : 'user'} seed={member.email} />
@@ -50,7 +50,7 @@ export const TeamTab: React.FC<TeamTabProps> = ({ teamMembers = [] }) => {
                   <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold border ${
                     member.role === 'Admin' ? 'bg-purple-900/20 text-purple-400 border-purple-900/50' : 
                     member.role === 'Editor' ? 'bg-blue-900/20 text-blue-400 border-blue-900/50' : 
-                    'bg-slate-800 text-slate-400 border-slate-700'
+                    'bg-slate-800 text-slate-400 border-white/10'
                   }`}>
                     {member.role}
                   </span>
@@ -69,7 +69,7 @@ export const TeamTab: React.FC<TeamTabProps> = ({ teamMembers = [] }) => {
                 <td className="px-4 py-3 text-right">
                   <button 
                     onClick={() => appStore.showToast('Member actions not implemented', 'info')} 
-                    className="text-slate-500 hover:text-white p-1 rounded hover:bg-slate-800"
+                    className="text-slate-500 hover:text-white p-1 rounded hover:bg-white/5"
                   >
                     <MoreVertical size={16} />
                   </button>

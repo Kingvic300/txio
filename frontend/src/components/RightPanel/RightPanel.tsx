@@ -129,22 +129,22 @@ export const RightPanel: React.FC<RightPanelProps> = ({
       onClick={() => setActiveTab(id)}
       className={`flex-1 flex flex-col items-center justify-center py-2.5 gap-1 transition-all relative ${
         activeTab === id 
-        ? 'text-sui-400' 
+        ? 'text-electric-violet' 
         : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
       }`}
       title={label}
     >
       <Icon size={16} strokeWidth={activeTab === id ? 2.5 : 2} />
       {activeTab === id && (
-        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-sui-400 shadow-[0_0_8px_currentColor]"></span>
+        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-electric-violet shadow-[0_0_8px_currentColor]"></span>
       )}
     </button>
   );
 
   return (
-    <div className="w-80 bg-black border-l border-white/10 flex flex-col h-full font-sans shadow-2xl relative z-30">
+    <div className="w-80 bg-near-black border-l border-white/10 flex flex-col h-full font-sans shadow-2xl relative z-30">
       {/* Header */}
-      <div className="shrink-0 flex items-center justify-between px-3 py-2 border-b border-white/10 bg-black">
+      <div className="shrink-0 flex items-center justify-between px-3 py-2 border-b border-white/10 bg-near-black">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Inspector</span>
           <div className={`px-1.5 py-0.5 rounded text-[9px] font-bold border uppercase tracking-wider ${
@@ -161,7 +161,7 @@ export const RightPanel: React.FC<RightPanelProps> = ({
       </div>
 
       {/* Navigation */}
-      <div className="shrink-0 flex border-b border-white/10 bg-black">
+      <div className="shrink-0 flex border-b border-white/10 bg-near-black">
         <TabButton id="wallet" icon={Wallet} label="Wallet" />
         <TabButton id="objects" icon={Box} label="Objects" />
         <TabButton id="analysis" icon={BrainCircuit} label="Analysis" />
@@ -183,7 +183,7 @@ export const RightPanel: React.FC<RightPanelProps> = ({
 
         {/* --- OBJECTS TAB --- */}
         {activeTab === 'objects' && (
-          <div className="flex-1 flex flex-col min-h-0 bg-black">
+          <div className="flex-1 flex flex-col min-h-0 bg-near-black">
             <ObjectsTab
               connectedAddress={connectedAddress}
               network={network}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { RequestItem, EnvironmentVariable, HistoryItem, CollectionNode, Workspace } from '../../types';
 import { appStore } from '@/lib/store';
 import { SidebarNav } from './SidebarNav';
@@ -63,11 +64,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="flex h-full bg-black border-r border-white/10 font-sans select-none">
+    <div className="flex h-full bg-near-black border-r border-white/10 font-sans select-none">
       {/* Navigation Rail */}
       <SidebarNav 
         activeMode={mode}
-        onModeChange={setMode}
+        onModeChange={(m) => setMode(m as SidebarMode)}
         activeTabType={activeTabType}
       />
 
@@ -91,35 +92,64 @@ export const Sidebar: React.FC<SidebarProps> = ({
         />
 
         {/* Content */}
-        <div className="flex-1 overtxio-y-auto custom-scrollbar flex flex-col min-h-0 bg-black">
-          {/* COLLECTIONS */}
-          {mode === 'collections' && (
-            <CollectionTree 
-              collections={collections}
-              activeTabId={activeTabId}
-              onToggleExpand={onToggleExpand}
-              onSelectCollectionRequest={onSelectCollectionRequest}
-              onCreateCollection={onCreateCollection}
-            />
-          )}
-          
-          {/* HISTORY */}
-          {mode === 'history' && (
-            <HistoryList 
-              history={history}
-              currentWorkspace={currentWorkspace}
-              onSelectRequest={onSelectRequest}
-              onOpenFullHistory={handleOpenFullHistory}
-            />
-          )}
+        <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col min-h-0 bg-near-black relative">
+          <AnimatePresence mode="wait">
+            {/* COLLECTIONS */}
+            {mode === 'collections' && (
+              <motion.div
+                key="collections"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                transition={{ duration: 0.15 }}
+                className="flex-1 flex flex-col"
+              >
+                <CollectionTree 
+                  collections={collections}
+                  activeTabId={activeTabId}
+                  onToggleExpand={onToggleExpand}
+                  onSelectCollectionRequest={onSelectCollectionRequest}
+                  onCreateCollection={onCreateCollection}
+                />
+              </motion.div>
+            )}
+            
+            {/* HISTORY */}
+            {mode === 'history' && (
+              <motion.div
+                key="history"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                transition={{ duration: 0.15 }}
+                className="flex-1 flex flex-col"
+              >
+                <HistoryList 
+                  history={history}
+                  currentWorkspace={currentWorkspace}
+                  onSelectRequest={onSelectRequest}
+                  onOpenFullHistory={handleOpenFullHistory}
+                />
+              </motion.div>
+            )}
 
-          {/* ENVIRONMENTS */}
-          {mode === 'env' && (
-            <EnvironmentList 
-              envVariables={envVariables}
-              onUpdateEnv={onUpdateEnv}
-            />
-          )}
+            {/* ENVIRONMENTS */}
+            {mode === 'env' && (
+              <motion.div
+                key="env"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                transition={{ duration: 0.15 }}
+                className="flex-1 flex flex-col"
+              >
+                <EnvironmentList 
+                  envVariables={envVariables}
+                  onUpdateEnv={onUpdateEnv}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

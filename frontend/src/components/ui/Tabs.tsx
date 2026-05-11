@@ -56,16 +56,16 @@ export const Tab: React.FC<TabProps> = ({ title, isActive, onSelect, onClose, on
     return (
         <div 
             className={`
-                group flex items-center gap-2 px-4 py-2 text-[11px] font-bold cursor-pointer border-r border-slate-800
-                transition-all select-none min-w-[140px] max-w-[240px] relative overtxio-hidden
+                group flex items-center gap-2 px-4 py-2 text-[11px] font-bold cursor-pointer border-r border-white/5
+                transition-all select-none min-w-[140px] max-w-[240px] relative overflow-hidden
                 ${isActive 
-                    ? 'bg-slate-900 text-sui-400 shadow-[inset_0_2px_0_0_#0ea5e9]' 
-                    : 'bg-slate-950 text-slate-500 hover:bg-slate-900 hover:text-slate-300'}
+                    ? 'bg-dark-indigo-glow text-electric-violet shadow-[inset_0_2px_0_0_#0ea5e9]' 
+                    : 'bg-near-black text-slate-500 hover:bg-dark-indigo-glow hover:text-slate-300'}
             `}
             onClick={onSelect}
             onDoubleClick={handleDoubleClick}
         >
-            {icon && <span className={`flex-shrink-0 ${isActive ? 'text-sui-400' : 'text-slate-600'}`}>{icon}</span>}
+            {icon && <span className={`flex-shrink-0 ${isActive ? 'text-electric-violet' : 'text-slate-600'}`}>{icon}</span>}
             
             {isEditing ? (
                 <input

@@ -19,7 +19,7 @@ export const SyntaxHighlightedJson: React.FC<SyntaxHighlightedJsonProps> = ({ da
           } else {
             className = "text-emerald-400";
             if (/^"0x[a-fA-F0-9]{64}"$/.test(part)) {
-              className = "text-sui-400 font-bold underline cursor-pointer hover:text-sui-300 transition-colors";
+              className = "text-electric-violet font-bold underline cursor-pointer hover:text-sui-300 transition-colors";
             }
           }
         } else if (/true|false/.test(part)) {

@@ -144,14 +144,14 @@ export const CommandPalette: React.FC = () => {
 
     return (
         <div 
-            className="fixed inset-0 z-[9999] flex flex-col items-center pt-[20vh] bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+            className="fixed inset-0 z-[9999] flex flex-col items-center pt-[20vh] bg-near-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
             onClick={() => appStore.setCommandPalette(false)}
         >
             <div 
-                className="w-full max-w-2xl bg-[#0c0c0e] border border-slate-700 rounded-xl shadow-2xl overtxio-hidden flex flex-col max-h-[60vh] relative animate-in zoom-in-95 duration-200"
+                className="w-full max-w-2xl bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[60vh] relative animate-in zoom-in-95 duration-200"
                 onClick={e => e.stopPropagation()}
             >
-                <div className="flex items-center px-4 py-3 border-b border-slate-800 bg-slate-900/50">
+                <div className="flex items-center px-4 py-3 border-b border-white/5 bg-dark-indigo-glow/50">
                     <Search className="text-slate-500 mr-3" size={18} />
                     <input
                         ref={inputRef}
@@ -161,12 +161,12 @@ export const CommandPalette: React.FC = () => {
                         onChange={e => { setSearch(e.target.value); setSelectedIndex(0); }}
                     />
                     <div className="flex gap-2">
-                        <kbd className="hidden sm:inline-block bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded text-[10px] font-mono border border-slate-700">↑↓</kbd>
-                        <kbd className="hidden sm:inline-block bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded text-[10px] font-mono border border-slate-700">↵</kbd>
+                        <kbd className="hidden sm:inline-block bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded text-[10px] font-mono border border-white/10">↑↓</kbd>
+                        <kbd className="hidden sm:inline-block bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded text-[10px] font-mono border border-white/10">↵</kbd>
                     </div>
                 </div>
 
-                <div className="flex-1 overtxio-y-auto custom-scrollbar p-2">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2">
                     {filteredCommands.length === 0 ? (
                         <div className="p-8 text-center text-slate-500 text-sm">No results found.</div>
                     ) : (
@@ -177,7 +177,7 @@ export const CommandPalette: React.FC = () => {
                                     onClick={() => { cmd.action(); appStore.setCommandPalette(false); }}
                                     onMouseEnter={() => setSelectedIndex(idx)}
                                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors ${
-                                        idx === selectedIndex ? 'bg-sui-600 text-white' : 'text-slate-400 hover:bg-slate-800'
+                                        idx === selectedIndex ? 'bg-electric-violet text-white' : 'text-slate-400 hover:bg-white/5'
                                     }`}
                                 >
                                     <div className={`p-1.5 rounded ${idx === selectedIndex ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-500'}`}>
@@ -196,7 +196,7 @@ export const CommandPalette: React.FC = () => {
                     )}
                 </div>
                 
-                <div className="px-4 py-2 border-t border-slate-800 bg-slate-900/50 text-[10px] text-slate-500 flex justify-between">
+                <div className="px-4 py-2 border-t border-white/5 bg-dark-indigo-glow/50 text-[10px] text-slate-500 flex justify-between">
                      <span>{filteredCommands.length} commands</span>
                      <span>Current Workspace: {workspaces.find(w => w.id === currentWorkspaceId)?.name}</span>
                 </div>

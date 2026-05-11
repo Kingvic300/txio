@@ -26,7 +26,7 @@ export const GeneralTab: React.FC<TabProps & { onLogout: () => void }> = ({
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-500 uppercase">Display Name</label>
             <input 
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:border-sui-500 outline-none" 
+              className="w-full bg-near-black border border-white/5 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:border-electric-violet outline-none" 
               value={editName}
               onChange={(e) => setEditName(e.target.value)}
             />
@@ -34,7 +34,7 @@ export const GeneralTab: React.FC<TabProps & { onLogout: () => void }> = ({
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
             <input 
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:border-sui-500 outline-none cursor-not-allowed opacity-70" 
+              className="w-full bg-near-black border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:border-electric-violet outline-none cursor-not-allowed opacity-70" 
               defaultValue={user?.email} 
               readOnly 
             />
@@ -44,7 +44,7 @@ export const GeneralTab: React.FC<TabProps & { onLogout: () => void }> = ({
         <div className="flex justify-end">
           <button 
             onClick={handleSaveProfile}
-            className="px-4 py-2 bg-sui-600 hover:bg-sui-500 text-white text-xs font-bold rounded-lg transition-all"
+            className="px-4 py-2 bg-electric-violet hover:bg-electric-violet text-white text-xs font-bold rounded-lg transition-all"
           >
             Save Changes
           </button>

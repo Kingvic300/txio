@@ -69,7 +69,7 @@ export const HistoryFeature: React.FC = () => {
             const paramsStr = JSON.stringify(item.rpcParams?.params || []);
             const truncatedParams = paramsStr.length > 80 ? paramsStr.substring(0, 80) + '...' : paramsStr;
             return (
-                <div className="text-xs font-mono mt-1 flex items-center gap-2 overtxio-hidden text-slate-500">
+                <div className="text-xs font-mono mt-1 flex items-center gap-2 overflow-hidden text-slate-500">
                     <span className="text-blue-400 font-bold shrink-0">{item.rpcParams?.method || 'Unknown Method'}</span>
                     <span className="truncate opacity-70" title={paramsStr}>{truncatedParams}</span>
                 </div>
@@ -79,7 +79,7 @@ export const HistoryFeature: React.FC = () => {
                 ? `${item.moveParams?.packageId?.slice(0,6)}...::${item.moveParams?.module}::${item.moveParams?.function}`
                 : item.txType;
             return (
-                <div className="text-xs font-mono mt-1 flex items-center gap-2 overtxio-hidden text-slate-500">
+                <div className="text-xs font-mono mt-1 flex items-center gap-2 overflow-hidden text-slate-500">
                      <span className="text-violet-400 font-bold shrink-0">{target}</span>
                 </div>
             );
@@ -97,9 +97,9 @@ export const HistoryFeature: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-slate-950 font-sans">
+        <div className="flex flex-col h-full bg-near-black font-sans">
             {/* Header */}
-            <div className="px-6 py-5 border-b border-slate-800 bg-slate-900/50 shrink-0">
+            <div className="px-6 py-5 border-b border-white/5 bg-dark-indigo-glow/50 shrink-0">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-xl font-bold text-slate-100 flex items-center gap-3">
@@ -124,16 +124,16 @@ export const HistoryFeature: React.FC = () => {
 
                 <div className="flex gap-4 items-center">
                     <div className="relative flex-1 max-w-md group">
-                        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-sui-400 transition-colors" />
+                        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-electric-violet transition-colors" />
                         <input 
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder:text-slate-600 focus:border-sui-500 outline-none transition-all" 
+                            className="w-full bg-near-black border border-white/5 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder:text-slate-600 focus:border-electric-violet outline-none transition-all" 
                             placeholder="Filter history..." 
                         />
                     </div>
                     
-                    <div className="flex bg-slate-950 p-1 rounded-lg border border-slate-800">
+                    <div className="flex bg-near-black p-1 rounded-lg border border-white/5">
                         {(['ALL', 'RPC', 'TRANSACTION', 'ERROR'] as HistoryFilter[]).map((f) => (
                             <button
                                 key={f}
@@ -152,10 +152,10 @@ export const HistoryFeature: React.FC = () => {
             </div>
 
             {/* Content */}
-            <div className="flex-1 overtxio-y-auto custom-scrollbar bg-slate-950 relative">
+            <div className="flex-1 overflow-y-auto custom-scrollbar bg-near-black relative">
                 {filteredHistory.length === 0 ? (
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-600">
-                        <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center mb-4 border border-slate-800">
+                        <div className="w-16 h-16 bg-dark-indigo-glow rounded-2xl flex items-center justify-center mb-4 border border-white/5">
                             <LayoutList size={24} className="opacity-50" />
                         </div>
                         <p className="text-sm font-medium text-slate-500">No requests found</p>
@@ -164,7 +164,7 @@ export const HistoryFeature: React.FC = () => {
                 ) : (
                     <div className="divide-y divide-slate-800/50">
                         {filteredHistory.map((item, index) => (
-                            <div key={item.id || index} className="grid grid-cols-12 gap-4 px-6 py-4 hover:bg-slate-900/40 items-center group transition-colors">
+                            <div key={item.id || index} className="grid grid-cols-12 gap-4 px-6 py-4 hover:bg-dark-indigo-glow/40 items-center group transition-colors">
                                 {/* Status Icon */}
                                 <div className="col-span-1">
                                     {item.status && item.status < 400 ? (
@@ -220,7 +220,7 @@ export const HistoryFeature: React.FC = () => {
                                 <div className="col-span-1 text-right">
                                     <button 
                                         onClick={() => handleReplay(item)}
-                                        className="p-2 text-slate-500 hover:text-sui-400 hover:bg-slate-800 rounded-lg transition-all opacity-0 group-hover:opacity-100"
+                                        className="p-2 text-slate-500 hover:text-electric-violet hover:bg-white/5 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                                         title="Replay Request"
                                     >
                                         <ArrowRight size={16} />

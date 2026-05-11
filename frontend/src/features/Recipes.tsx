@@ -14,7 +14,7 @@ const MOCK_RECIPES = [
 
 export const Recipes: React.FC = () => {
     return (
-        <div className="flex flex-col h-full bg-slate-950 p-6">
+        <div className="flex flex-col h-full bg-near-black p-6">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-lg font-bold text-slate-200">Transaction Recipes</h1>
                 <button onClick={() => appStore.showToast('Template creation wizard not implemented', 'info')} className="text-xs bg-slate-800 text-slate-300 px-3 py-1.5 rounded hover:text-white flex items-center gap-1">
@@ -22,10 +22,10 @@ export const Recipes: React.FC = () => {
                 </button>
             </div>
 
-            <div className="border border-slate-800 rounded bg-slate-900 overtxio-hidden">
+            <div className="border border-white/5 rounded bg-dark-indigo-glow overflow-hidden">
                 <div className="grid grid-cols-1 divide-y divide-slate-800">
                     {MOCK_RECIPES.map((recipe) => (
-                        <div key={recipe.id} className="p-3 flex items-center justify-between hover:bg-slate-800/50 group">
+                        <div key={recipe.id} className="p-3 flex items-center justify-between hover:bg-white/5/50 group">
                             <div className="flex items-center gap-3">
                                 <FileCode size={16} className="text-slate-500" />
                                 <div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Layout } from "./Layout";
 import { Sidebar } from "@/components/SideBar/Sidebar";
@@ -14,6 +14,12 @@ import { RequestType, TeamMember } from "@/types";
 
 // Import your feature components
 import { Dashboard } from "@/features/Dashboard";
+import { LandingPage } from "@/features/LandingPage";
+import { DocsPage } from "@/features/DocsPage";
+import { EcosystemPage } from "@/features/EcosystemPage";
+import { AuthPage } from "@/features/AuthPage";
+import { SignInPage } from "@/features/SignInPage";
+import { GetStartedPage } from "@/features/GetStartedPage";
 import { RPCBuilder } from "@/features/RPCBuilder";
 import { PTBBuilder } from "@/features/PTBBuilder";
 import { HistoryFeature } from "@/features/History";
@@ -23,29 +29,7 @@ import { SettingsPage } from "@/features/SettingsPage";
 import { AIChat } from "@/features/AIChat";
 import { CollectionRunner } from "@/features/CollectionRunner";
 
-const MOCK_TEAM: TeamMember[] = [
-    {
-        id: "1",
-        name: "Sui Developer",
-        email: "dev@sui.io",
-        role: "Admin",
-        status: "Active",
-    },
-    {
-        id: "2",
-        name: "Alice Move",
-        email: "alice@mysten.com",
-        role: "Editor",
-        status: "Active",
-    },
-    {
-        id: "3",
-        name: "Bob PTB",
-        email: "bob@ptb.io",
-        role: "Viewer",
-        status: "Pending",
-    },
-];
+const MOCK_TEAM: TeamMember[] = [];
 
 const networks = {
     mainnet: { url: getFullnodeUrl("mainnet") },
@@ -75,9 +59,9 @@ const WorkspaceContent: React.FC = () => {
         case 'dashboard':
             return <Dashboard />;
         case 'rpc':
-            return <RPCBuilder tabData={activeTab.data} />;
+            return <RPCBuilder />;
         case 'ptb':
-            return <PTBBuilder tabData={activeTab.data} />;
+            return <PTBBuilder />;
         case 'history':
             return <HistoryFeature />;
         case 'settings':
@@ -93,7 +77,7 @@ const WorkspaceContent: React.FC = () => {
             return <CollectionRunner collectionId={activeTab.data?.collectionId} />;
         case 'move':
             // Create or import MoveBuilder component
-            return <div className="p-8 text-white">Move Builder (Coming Soon)</div>;
+            return <div className="p-8 text-white">Contract Builder (Coming Soon)</div>;
         case 'playground':
             // Create or import Playground component
             return <div className="p-8 text-white">Playground (Coming Soon)</div>;
@@ -117,12 +101,65 @@ const App: React.FC = () => {
         activityLogs,
         comments,
         network,
+        viewMode,
     } = useAppStore();
 
     const [showEntrance, setShowEntrance] = useState(true);
 
+    useEffect(() => {
+        appStore.initialize();
+    }, []);
+
     const currentWorkspace =
         workspaces.find((w) => w.id === currentWorkspaceId) || workspaces[0];
+
+    if (viewMode === 'landing') {
+        return (
+            <QueryClientProvider client={queryClient}>
+                <LandingPage />
+            </QueryClientProvider>
+        );
+    }
+
+    if (viewMode === 'docs') {
+        return (
+            <QueryClientProvider client={queryClient}>
+                <DocsPage />
+            </QueryClientProvider>
+        );
+    }
+
+    if (viewMode === 'ecosystem') {
+        return (
+            <QueryClientProvider client={queryClient}>
+                <EcosystemPage />
+            </QueryClientProvider>
+        );
+    }
+
+    if (viewMode === 'signin') {
+        return (
+            <QueryClientProvider client={queryClient}>
+                <SignInPage />
+            </QueryClientProvider>
+        );
+    }
+
+    if (viewMode === 'signup') {
+        return (
+            <QueryClientProvider client={queryClient}>
+                <GetStartedPage />
+            </QueryClientProvider>
+        );
+    }
+
+    if (viewMode === 'auth') {
+        return (
+            <QueryClientProvider client={queryClient}>
+                <AuthPage />
+            </QueryClientProvider>
+        );
+    }
 
     return (            
         <QueryClientProvider client={queryClient}>

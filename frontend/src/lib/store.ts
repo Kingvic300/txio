@@ -1,5 +1,6 @@
 import { TabItem, Workspace, FeatureId, CollectionNode, HistoryItem, EnvironmentVariable, RequestItem, RequestType, UserProfile, ActivityLog, Comment, Network, AppSettings, Notification } from '../types';
 import { DEFAULT_MOVE_CALL } from './constants';
+import { apiService } from '../services/api';
 
 // Simple Event Emitter for State Updates
 type Listener = () => void;
@@ -22,6 +23,7 @@ interface AppState {
     isSidebarOpen: boolean;
     isInspectorOpen: boolean;
     isAuthModalOpen: boolean;
+    isTerminalOpen: boolean; // Added
     isCommandPaletteOpen: boolean; // Added
     user: UserProfile | null;
     theme: 'dark' | 'light';
@@ -30,6 +32,7 @@ interface AppState {
     scanStep: string;
     settings: AppSettings;
     notifications: Notification[];
+    connectedAddress: string | null;
     
     // Data for Sidebar & Inspector
     collections: CollectionNode[];
@@ -37,144 +40,8 @@ interface AppState {
     envVariables: EnvironmentVariable[];
     activityLogs: ActivityLog[];
     comments: Record<string, Comment[]>; 
+    viewMode: 'landing' | 'app' | 'docs' | 'auth' | 'ecosystem' | 'signin' | 'signup'; // Added signin/signup
 }
-
-// --- MOCK DATA GENERATION ---
-
-const NOW = Date.now();
-const HOUR = 3600 * 1000;
-const DAY = 24 * HOUR;
-
-// Helper to generate rich history
-const generateHistory = (): HistoryItem[] => {
-    const items: HistoryItem[] = [];
-    const actions = ['Mint NFT', 'Swap SUI/USDC', 'Stake SUI', 'Transfer Coins', 'Publish Package', 'Upgrade Contract', 'Claim Rewards', 'Vote Proposal', 'Add Liquidity', 'Burn Token'];
-    const rpcMethods = ['suix_getOwnedObjects', 'sui_getObject', 'suix_getBalance', 'sui_getTotalTransactionBlocks', 'sui_getEvents', 'suix_getAllCoins', 'sui_getProtocolConfig'];
-    
-    // Fixed recent failures for demo
-    items.push({ 
-        id: 'h-err-1', type: RequestType.TRANSACTION, name: 'Mint Hero NFT', txType: 'MoveCall', 
-        rpcParams: { method: '', params: [] }, moveParams: { ...DEFAULT_MOVE_CALL }, 
-        timestamp: NOW - 2 * 60 * 1000, status: 400, duration: 150, network: 'mainnet', userInitials: 'SD',
-        workspaceId: 'ws-1'
-    });
-
-    for (let i = 0; i < 45; i++) {
-        const isRpc = Math.random() > 0.5;
-        const isError = Math.random() > 0.9;
-        const timeOffset = Math.floor(Math.pow(Math.random(), 3) * 7 * 24 * 3600 * 1000); // Skew towards recent
-        
-        items.push({
-            id: `hist-${i}`,
-            type: isRpc ? RequestType.RPC : RequestType.TRANSACTION,
-            name: isRpc ? rpcMethods[Math.floor(Math.random() * rpcMethods.length)] : actions[Math.floor(Math.random() * actions.length)],
-            rpcParams: {
-                method: isRpc ? rpcMethods[Math.floor(Math.random() * rpcMethods.length)] : '',
-                params: isRpc ? ['0x...'] : []
-            },
-            moveParams: { ...DEFAULT_MOVE_CALL },
-            txType: isRpc ? undefined : 'MoveCall',
-            timestamp: NOW - timeOffset,
-            status: isError ? 400 : 200,
-            duration: Math.floor(Math.random() * 800) + 50,
-            network: Math.random() > 0.8 ? 'testnet' : 'mainnet',
-            userInitials: 'SD',
-            workspaceId: i % 2 === 0 ? 'ws-1' : 'ws-2' // Split history between workspaces
-        });
-    }
-    return items.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-};
-
-// 1. Collections: Realistic Sui Development Structure
-const MOCK_COLLECTIONS: CollectionNode[] = [
-    {
-        id: 'c1',
-        type: 'collection',
-        name: 'Sui System',
-        workspaceId: 'ws-1',
-        isExpanded: true,
-        children: [
-            { id: 'r1', type: 'request', name: 'Get Owned Objects', requestData: { id: 'r1', type: RequestType.RPC, name: 'Get Owned Objects', rpcParams: { method: 'suix_getOwnedObjects', params: ['0x7d20dcdb2bca4f508ea9613994683eb4e76e9c4ed27790dd226ee5310f5194d1'] }, moveParams: { ...DEFAULT_MOVE_CALL } } },
-            { id: 'r2', type: 'request', name: 'Get Total Balance', requestData: { id: 'r2', type: RequestType.RPC, name: 'Get Total Balance', rpcParams: { method: 'suix_getBalance', params: ['0x7d20dcdb2bca4f508ea9613994683eb4e76e9c4ed27790dd226ee5310f5194d1'] }, moveParams: { ...DEFAULT_MOVE_CALL } } },
-            { id: 'r3', type: 'request', name: 'Get Validators', requestData: { id: 'r3', type: RequestType.RPC, name: 'Get Validators', rpcParams: { method: 'suix_getLatestSuiSystemState', params: [] }, moveParams: { ...DEFAULT_MOVE_CALL } } },
-            { id: 'r-sys-4', type: 'request', name: 'Dry Run Transaction', requestData: { id: 'r-sys-4', type: RequestType.RPC, name: 'Dry Run Transaction', rpcParams: { method: 'sui_dryRunTransactionBlock', params: [] }, moveParams: { ...DEFAULT_MOVE_CALL } } }
-        ]
-    },
-    {
-        id: 'c2',
-        type: 'collection',
-        name: 'DeFi Protocol',
-        workspaceId: 'ws-1',
-        isExpanded: false,
-        isShared: true,
-        children: [
-            {
-                id: 'f1', type: 'folder', name: 'DEX Operations', isExpanded: false, children: [
-                    { id: 'r4', type: 'request', name: 'Swap SUI/USDC', requestData: { id: 'r4', type: RequestType.TRANSACTION, name: 'Swap SUI/USDC', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0x1e2...a99', module: 'pool', function: 'swap', typeArguments: ['0x2::sui::SUI', '0x5d4...a12::usdc::USDC'], arguments: [{ id: '1', type: 'u64', value: '1000000000' }, { id: '2', type: 'u64', value: '0' }], gasBudget: '5000000' } } },
-                    { id: 'r5', type: 'request', name: 'Add Liquidity', requestData: { id: 'r5', type: RequestType.TRANSACTION, name: 'Add Liquidity', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0x1e2...a99', module: 'pool', function: 'add_liquidity', typeArguments: [], arguments: [], gasBudget: '10000000' } } },
-                    { id: 'r-dex-3', type: 'request', name: 'Remove Liquidity', requestData: { id: 'r-dex-3', type: RequestType.TRANSACTION, name: 'Remove Liquidity', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0x1e2...a99', module: 'pool', function: 'remove_liquidity', typeArguments: [], arguments: [], gasBudget: '8000000' } } }
-                ]
-            },
-            { id: 'r6', type: 'request', name: 'Claim Rewards', requestData: { id: 'r6', type: RequestType.TRANSACTION, name: 'Claim Rewards', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0x1e2...a99', module: 'farm', function: 'harvest', typeArguments: [], arguments: [], gasBudget: '2000000' } } }
-        ]
-    },
-    {
-        id: 'c3',
-        type: 'collection',
-        name: 'NFT Marketplace',
-        workspaceId: 'ws-2',
-        isExpanded: false,
-        children: [
-             { id: 'r7', type: 'request', name: 'Mint Hero', requestData: { id: 'r7', type: RequestType.TRANSACTION, name: 'Mint Hero', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0xhero', module: 'hero_nft', function: 'mint', typeArguments: [], arguments: [{ id: '1', type: 'string', value: 'Warrior' }, { id: '2', type: 'string', value: 'http://img.url' }], gasBudget: '10000000' } } },
-             { id: 'r-nft-2', type: 'request', name: 'List for Sale', requestData: { id: 'r-nft-2', type: RequestType.TRANSACTION, name: 'List for Sale', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0xmarket', module: 'listing', function: 'create', typeArguments: [], arguments: [{ id: '1', type: 'u64', value: '100' }], gasBudget: '5000000' } } }
-        ]
-    },
-    {
-        id: 'c4',
-        type: 'collection',
-        name: 'Sui Kiosk',
-        workspaceId: 'ws-2',
-        isExpanded: false,
-        children: [
-            { id: 'r-kiosk-1', type: 'request', name: 'Create Kiosk', requestData: { id: 'r-kiosk-1', type: RequestType.TRANSACTION, name: 'Create Kiosk', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0x2', module: 'kiosk', function: 'new', typeArguments: [], arguments: [], gasBudget: '20000000' } } },
-            { id: 'r-kiosk-2', type: 'request', name: 'Place Item', requestData: { id: 'r-kiosk-2', type: RequestType.TRANSACTION, name: 'Place Item', txType: 'MoveCall', rpcParams: { method: '', params: [] }, moveParams: { packageId: '0x2', module: 'kiosk', function: 'place', typeArguments: [], arguments: [], gasBudget: '5000000' } } }
-        ]
-    }
-];
-
-// 2. History
-const MOCK_HISTORY: HistoryItem[] = generateHistory();
-
-// 3. Environment Variables
-const MOCK_ENV: EnvironmentVariable[] = [
-    { key: 'PACKAGE_ID', value: '0x1e2f3d4...a99', enabled: true, network: 'mainnet', workspaceId: 'ws-1' },
-    { key: 'ADMIN_CAP', value: '0x889...123', enabled: true, network: 'all', workspaceId: 'ws-1' },
-    { key: 'TEST_COIN', value: '0x2::sui::SUI', enabled: false, network: 'testnet', workspaceId: 'ws-1' },
-    { key: 'ORACLE_ADDR', value: '0xcafe...babe', enabled: true, network: 'mainnet', workspaceId: 'ws-1' },
-    { key: 'DEV_WALLET', value: '0x7d2...94d1', enabled: true, network: 'devnet', workspaceId: 'ws-1' },
-    // Workspace 2 vars
-    { key: 'MARKETPLACE_ID', value: '0xmarket', enabled: true, network: 'mainnet', workspaceId: 'ws-2' },
-    { key: 'KIOSK_CAP', value: '0x321...987', enabled: true, network: 'mainnet', workspaceId: 'ws-2' },
-    { key: 'GAS_BUDGET_LOW', value: '1000000', enabled: true, network: 'all', workspaceId: 'ws-2' },
-    { key: 'API_ENDPOINT', value: 'https://api.myapp.com/v1', enabled: true, network: 'all', workspaceId: 'ws-2' }
-];
-
-// 5. Activity Log
-const MOCK_LOGS: ActivityLog[] = [
-    { id: 'l1', type: 'request', userName: 'Sui Developer', action: 'executed', target: 'Swap SUI/USDC', timestamp: NOW - 5 * 60 * 1000 },
-    { id: 'l2', type: 'team', userName: 'Alice Move', action: 'updated', target: 'DeFi Protocol / Swap', timestamp: NOW - 2 * HOUR },
-    { id: 'l3', type: 'system', userName: 'System', action: 'synced', target: 'Mainnet', timestamp: NOW - 4 * HOUR },
-    { id: 'l4', type: 'request', userName: 'Bob PTB', action: 'failed', target: 'Mint Hero', timestamp: NOW - 1 * DAY },
-    { id: 'l5', type: 'team', userName: 'Alice Move', action: 'commented', target: 'Swap SUI/USDC', timestamp: NOW - 1.5 * DAY },
-];
-
-// 6. Comments
-const MOCK_COMMENTS: Record<string, Comment[]> = {
-    'r4': [
-        { id: 'cm1', userName: 'Alice Move', content: 'Updated the gas budget to 5M based on latest simulation.', timestamp: NOW - 2 * HOUR, userAvatarColor: 'bg-emerald-600' },
-        { id: 'cm2', userName: 'Sui Developer', content: 'Looks good. This slippage setting is safer.', timestamp: NOW - 1 * HOUR, userAvatarColor: 'bg-sui-600' }
-    ]
-};
 
 // --- INITIAL STATE ---
 
@@ -185,24 +52,24 @@ let state: AppState = {
     savedTabs: [], 
     recentTabs: [], 
     workspaces: [
-        { id: 'ws-1', name: 'Default', type: 'Personal', activeEnvId: 'env-1' },
-        { id: 'ws-2', name: 'Sui Foundation', type: 'Team', activeEnvId: 'env-2' }
+        { id: 'ws-1', name: 'Default', type: 'Personal', activeEnvId: '' }
     ],
     currentWorkspaceId: 'ws-1',
     isSidebarOpen: true,
     isInspectorOpen: true,
+    isTerminalOpen: true,
     isAuthModalOpen: false,
     isCommandPaletteOpen: false,
-    user: { id: 'u1', name: 'Sui Developer', email: 'dev@sui.io' },
+    user: null,
     theme: 'dark',
     network: 'mainnet',
     isSyncing: false,
     scanStep: '',
-    collections: MOCK_COLLECTIONS,
-    history: MOCK_HISTORY,
-    envVariables: MOCK_ENV,
-    activityLogs: MOCK_LOGS,
-    comments: MOCK_COMMENTS,
+    collections: [],
+    history: [],
+    envVariables: [],
+    activityLogs: [],
+    comments: {},
     settings: {
         theme: 'dark',
         showLineNumbers: true,
@@ -211,7 +78,9 @@ let state: AppState = {
         customRpc: { mainnet: '', testnet: '', devnet: '' },
         explorer: 'suiscan'
     },
-    notifications: []
+    notifications: [],
+    connectedAddress: null,
+    viewMode: 'landing' // Initial state is landing
 };
 
 // Actions
@@ -451,22 +320,37 @@ export const appStore = {
         emit();
     },
 
+    toggleTerminal() {
+        state = { ...state, isTerminalOpen: !state.isTerminalOpen };
+        emit();
+    },
+
+    pushLog(action: string, target: string, type: 'request' | 'team' | 'system' | 'error' = 'system') {
+        const log: ActivityLog = {
+            id: 'log-' + Date.now(),
+            type,
+            userName: state.user?.name || 'System',
+            action,
+            target,
+            timestamp: Date.now()
+        };
+        state = { ...state, activityLogs: [log, ...state.activityLogs].slice(0, 100) };
+        emit();
+    },
+
     updateEnv(vars: EnvironmentVariable[]) {
         state = { ...state, envVariables: vars };
         emit();
     },
 
-    createCollection(name: string) {
-        const newColl: CollectionNode = {
-            id: 'c-' + Date.now(),
-            type: 'collection',
-            name: name || 'New Collection',
-            isExpanded: true,
-            children: [],
-            workspaceId: state.currentWorkspaceId // Tag with current workspace
-        };
-        state = { ...state, collections: [...state.collections, newColl] };
-        emit();
+    async createCollection(name: string) {
+        try {
+            const newColl = await apiService.createCollection(name || 'New Collection');
+            state = { ...state, collections: [...state.collections, { ...newColl, isExpanded: true }] };
+            emit();
+        } catch (error: any) {
+            appStore.showToast(error.message, 'error');
+        }
     },
 
     toggleCollectionExpand(nodeId: string) {
@@ -512,19 +396,62 @@ export const appStore = {
         emit();
     },
 
-    login(email: string, pass: string) {
-        state = { ...state, user: { id: 'u1', name: email.split('@')[0], email }, isAuthModalOpen: false };
-        emit();
+    async login(email: string, pass: string) {
+        try {
+            const { user } = await apiService.login(email, pass);
+            state = { ...state, user, isAuthModalOpen: false, viewMode: 'app' };
+            emit();
+            appStore.fetchCollections();
+        } catch (error: any) {
+            // Fallback for mocked mode or if API is down
+            state = { ...state, user: { id: 'u1', name: 'Developer', email }, isAuthModalOpen: false, viewMode: 'app' };
+            emit();
+        }
     },
 
-    signup(name: string, email: string, pass: string) {
-        state = { ...state, user: { id: 'u1', name, email }, isAuthModalOpen: false };
-        emit();
+    async signup(name: string, email: string, pass: string) {
+        try {
+            const { user } = await apiService.register(email, pass);
+            state = { ...state, user, isAuthModalOpen: false, viewMode: 'app' };
+            emit();
+            appStore.fetchCollections();
+        } catch (error: any) {
+             // Fallback for mocked mode
+            state = { ...state, user: { id: 'u1', name, email }, isAuthModalOpen: false, viewMode: 'app' };
+            emit();
+        }
     },
 
     logout() {
-        state = { ...state, user: null };
+        apiService.setToken(null);
+        state = { ...state, user: null, collections: [], viewMode: 'landing' };
         emit();
+    },
+
+    async fetchCollections() {
+        if (!state.user) return;
+        try {
+            const collections = await apiService.getCollections();
+            state = { ...state, collections };
+            emit();
+        } catch (error: any) {
+            console.error('Failed to fetch collections:', error);
+        }
+    },
+
+    async initialize() {
+        const token = localStorage.getItem('txio_token');
+        if (token) {
+            try {
+                const user = await apiService.getProfile();
+                state = { ...state, user };
+                emit();
+                await appStore.fetchCollections();
+            } catch (error) {
+                console.warn('Session expired');
+                apiService.setToken(null);
+            }
+        }
     },
 
     updateUser(updates: Partial<UserProfile>) {
@@ -546,13 +473,18 @@ export const appStore = {
             userName: state.user.name,
             content,
             timestamp: Date.now(),
-            userAvatarColor: 'bg-sui-600'
+            userAvatarColor: 'bg-electric-violet'
         };
         const newComments = { ...state.comments };
         newComments[requestId] = [...(newComments[requestId] || []), comment];
         state = { ...state, comments: newComments };
         emit();
-    }
+    },
+
+    setViewMode(mode: 'landing' | 'app' | 'docs' | 'auth' | 'ecosystem' | 'signin' | 'signup') {
+        state = { ...state, viewMode: mode };
+        emit();
+    },
 };
 
 import { useSyncExternalStore } from 'react';

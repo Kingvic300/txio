@@ -40,14 +40,14 @@ export const NewRequestPage: React.FC<NewRequestPageProps> = ({ tabId }) => {
   };
 
   return (
-    <div className="h-full bg-slate-950 flex flex-col items-center justify-center p-6">
+    <div className="h-full bg-near-black flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full">
         <h1 className="text-lg font-bold text-slate-200 mb-6 px-1">Select Request Type</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <button 
                 onClick={() => handleCreate('rpc')}
-                className="flex flex-col items-center gap-4 p-8 bg-slate-900 border border-slate-800 rounded-lg hover:border-slate-600 hover:bg-slate-800 transition-colors group text-center"
+                className="flex flex-col items-center gap-4 p-8 bg-dark-indigo-glow border border-white/5 rounded-lg hover:border-slate-600 hover:bg-white/5 transition-colors group text-center"
             >
                 <div className="text-slate-500 group-hover:text-white transition-colors"><Terminal size={32} /></div>
                 <div>
@@ -58,7 +58,7 @@ export const NewRequestPage: React.FC<NewRequestPageProps> = ({ tabId }) => {
 
             <button 
                 onClick={() => handleCreate('ptb')}
-                className="flex flex-col items-center gap-4 p-8 bg-slate-900 border border-slate-800 rounded-lg hover:border-slate-600 hover:bg-slate-800 transition-colors group text-center"
+                className="flex flex-col items-center gap-4 p-8 bg-dark-indigo-glow border border-white/5 rounded-lg hover:border-slate-600 hover:bg-white/5 transition-colors group text-center"
             >
                 <div className="text-slate-500 group-hover:text-white transition-colors"><Layers size={32} /></div>
                 <div>
@@ -68,7 +68,7 @@ export const NewRequestPage: React.FC<NewRequestPageProps> = ({ tabId }) => {
             </button>
         </div>
         
-        <div className="mt-8 pt-6 border-t border-slate-800">
+        <div className="mt-8 pt-6 border-t border-white/5">
              <div className="flex justify-center gap-4">
                  <button onClick={() => appStore.showToast('Import cURL not implemented', 'info')} className="text-xs text-slate-500 hover:text-slate-300 font-mono">Import cURL</button>
                  <button onClick={() => appStore.showToast('File import not implemented', 'info')} className="text-xs text-slate-500 hover:text-slate-300 font-mono">Import from File</button>

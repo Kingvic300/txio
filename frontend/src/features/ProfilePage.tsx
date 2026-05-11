@@ -38,13 +38,13 @@ export const ProfilePage: React.FC = () => {
     };
 
     return (
-        <div className="h-full bg-slate-950 overtxio-y-auto custom-scrollbar">
+        <div className="h-full bg-near-black overflow-y-auto custom-scrollbar">
             {/* Header / Banner */}
             <div 
-                className="h-48 bg-gradient-to-r from-slate-900 to-slate-800 relative border-b border-slate-800 bg-cover bg-center group"
+                className="h-48 bg-gradient-to-r from-slate-900 to-slate-800 relative border-b border-white/5 bg-cover bg-center group"
                 style={{ backgroundImage: user.bannerUrl ? `url(${user.bannerUrl})` : undefined }}
             >
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                <div className="absolute inset-0 bg-near-black/20 group-hover:bg-near-black/40 transition-colors"></div>
                 
                 <input 
                     type="file" 
@@ -55,7 +55,7 @@ export const ProfilePage: React.FC = () => {
                 />
                 <button 
                     onClick={() => bannerInputRef.current?.click()}
-                    className="absolute top-4 right-6 p-2 bg-black/40 hover:bg-black/60 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all border border-white/10"
+                    className="absolute top-4 right-6 p-2 bg-near-black/40 hover:bg-near-black/60 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all border border-white/10"
                     title="Change Banner"
                 >
                     <ImageIcon size={16} />
@@ -63,7 +63,7 @@ export const ProfilePage: React.FC = () => {
 
                 <div className="absolute -bottom-12 left-6 md:left-10 flex items-end gap-6 z-10">
                     <div className="relative group/avatar">
-                        <div className="p-1.5 bg-slate-950 rounded-2xl border border-slate-800">
+                        <div className="p-1.5 bg-near-black rounded-2xl border border-white/5">
                             <Avatar size="xl" type="user" className="rounded-xl" src={user.avatarUrl} seed={user.email} />
                         </div>
                         
@@ -76,7 +76,7 @@ export const ProfilePage: React.FC = () => {
                         />
                         <button 
                             onClick={() => avatarInputRef.current?.click()}
-                            className="absolute inset-0 flex items-center justify-center bg-black/50 text-white opacity-0 group-hover/avatar:opacity-100 rounded-2xl transition-opacity m-1.5"
+                            className="absolute inset-0 flex items-center justify-center bg-near-black/50 text-white opacity-0 group-hover/avatar:opacity-100 rounded-2xl transition-opacity m-1.5"
                         >
                             <Camera size={24} />
                         </button>
@@ -89,7 +89,7 @@ export const ProfilePage: React.FC = () => {
                 </div>
                 
                 <div className="absolute bottom-4 right-6 flex gap-3 z-10 hidden sm:flex">
-                     <div className="px-4 py-2 bg-black/40 backdrop-blur rounded-lg border border-white/10 text-xs font-mono text-slate-300">
+                     <div className="px-4 py-2 bg-near-black/40 backdrop-blur rounded-lg border border-white/10 text-xs font-mono text-slate-300">
                         USER ID: <span className="text-white font-bold">{user.id}</span>
                      </div>
                 </div>
@@ -99,15 +99,15 @@ export const ProfilePage: React.FC = () => {
                 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-slate-900 border border-slate-800 p-4 md:p-5 rounded-xl">
+                    <div className="bg-dark-indigo-glow border border-white/5 p-4 md:p-5 rounded-xl">
                         <div className="flex justify-between items-start mb-2">
-                            <div className="p-2 bg-sui-500/10 text-sui-400 rounded-lg"><Zap className="w-4 h-4 md:w-5 md:h-5" /></div>
+                            <div className="p-2 bg-electric-violet/10 text-electric-violet rounded-lg"><Zap className="w-4 h-4 md:w-5 md:h-5" /></div>
                             <span className="text-[10px] text-slate-500 font-bold uppercase hidden md:inline">Plan</span>
                         </div>
                         <div className="text-lg md:text-xl font-bold text-white">Pro</div>
                         <div className="text-[10px] md:text-xs text-slate-400 mt-1">Unlimited</div>
                     </div>
-                     <div className="bg-slate-900 border border-slate-800 p-4 md:p-5 rounded-xl">
+                     <div className="bg-dark-indigo-glow border border-white/5 p-4 md:p-5 rounded-xl">
                         <div className="flex justify-between items-start mb-2">
                             <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg"><Activity className="w-4 h-4 md:w-5 md:h-5" /></div>
                             <span className="text-[10px] text-slate-500 font-bold uppercase hidden md:inline">Activity</span>
@@ -115,7 +115,7 @@ export const ProfilePage: React.FC = () => {
                         <div className="text-lg md:text-xl font-bold text-white">{history.length} Calls</div>
                         <div className="text-[10px] md:text-xs text-slate-400 mt-1">This Session</div>
                     </div>
-                     <div className="bg-slate-900 border border-slate-800 p-4 md:p-5 rounded-xl">
+                     <div className="bg-dark-indigo-glow border border-white/5 p-4 md:p-5 rounded-xl">
                         <div className="flex justify-between items-start mb-2">
                             <div className="p-2 bg-amber-500/10 text-amber-400 rounded-lg"><Award className="w-4 h-4 md:w-5 md:h-5" /></div>
                             <span className="text-[10px] text-slate-500 font-bold uppercase hidden md:inline">Reputation</span>
@@ -123,7 +123,7 @@ export const ProfilePage: React.FC = () => {
                         <div className="text-lg md:text-xl font-bold text-white">Lvl 42</div>
                         <div className="text-[10px] md:text-xs text-slate-400 mt-1">Sui Builder</div>
                     </div>
-                     <div className="bg-slate-900 border border-slate-800 p-4 md:p-5 rounded-xl">
+                     <div className="bg-dark-indigo-glow border border-white/5 p-4 md:p-5 rounded-xl">
                         <div className="flex justify-between items-start mb-2">
                             <div className="p-2 bg-purple-500/10 text-purple-400 rounded-lg"><Shield className="w-4 h-4 md:w-5 md:h-5" /></div>
                             <span className="text-[10px] text-slate-500 font-bold uppercase hidden md:inline">Security</span>
@@ -137,36 +137,36 @@ export const ProfilePage: React.FC = () => {
                     {/* Main Settings */}
                     <div className="lg:col-span-2 space-y-6">
                         <section>
-                            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">Profile Information</h2>
-                            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 space-y-4">
+                            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">Profile Information</h2>
+                            <div className="bg-dark-indigo-glow border border-white/5 rounded-xl p-4 md:p-6 space-y-4">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-bold text-slate-500 uppercase">Display Name</label>
                                         <input 
-                                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-300 focus:border-sui-500 outline-none" 
+                                            className="w-full bg-near-black border border-white/5 rounded-lg px-4 py-2 text-sm text-slate-300 focus:border-electric-violet outline-none" 
                                             value={nameInput} 
                                             onChange={(e) => setNameInput(e.target.value)}
                                         />
                                     </div>
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
-                                        <input className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-500" defaultValue={user.email} disabled />
+                                        <input className="w-full bg-near-black border border-white/5 rounded-lg px-4 py-2 text-sm text-slate-500" defaultValue={user.email} disabled />
                                     </div>
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-bold text-slate-500 uppercase">GitHub Connected</label>
-                                        <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-300">
+                                        <div className="flex items-center gap-2 bg-near-black border border-white/5 rounded-lg px-4 py-2 text-sm text-slate-300">
                                             <div className="w-2 h-2 bg-emerald-500 rounded-full"></div> {user.name.replace(' ', '')}
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-bold text-slate-500 uppercase">Timezone</label>
-                                         <input className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-300 focus:border-sui-500 outline-none" defaultValue="UTC-08:00 (Pacific Time)" />
+                                         <input className="w-full bg-near-black border border-white/5 rounded-lg px-4 py-2 text-sm text-slate-300 focus:border-electric-violet outline-none" defaultValue="UTC-08:00 (Pacific Time)" />
                                     </div>
                                 </div>
                                 <div className="pt-4 flex justify-end">
                                     <button 
                                         onClick={handleSave}
-                                        className={`px-4 py-2 bg-sui-600 hover:bg-sui-500 text-white text-xs font-bold rounded-lg transition-all flex items-center gap-2 ${savedSuccess ? 'bg-emerald-600 hover:bg-emerald-500' : ''}`}
+                                        className={`px-4 py-2 bg-electric-violet hover:bg-electric-violet text-white text-xs font-bold rounded-lg transition-all flex items-center gap-2 ${savedSuccess ? 'bg-emerald-600 hover:bg-emerald-500' : ''}`}
                                     >
                                         {isSaving ? 'Saving...' : savedSuccess ? <><Check size={14} /> Saved</> : 'Save Changes'}
                                     </button>
@@ -175,10 +175,10 @@ export const ProfilePage: React.FC = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">Recent Sessions</h2>
-                            <div className="bg-slate-900 border border-slate-800 rounded-xl overtxio-x-auto">
+                            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">Recent Sessions</h2>
+                            <div className="bg-dark-indigo-glow border border-white/5 rounded-xl overflow-x-auto">
                                 <table className="w-full text-left min-w-[500px]">
-                                    <thead className="bg-slate-950 text-xs text-slate-500 uppercase">
+                                    <thead className="bg-near-black text-xs text-slate-500 uppercase">
                                         <tr>
                                             <th className="px-6 py-3 font-medium">Device</th>
                                             <th className="px-6 py-3 font-medium">Location</th>
@@ -205,15 +205,15 @@ export const ProfilePage: React.FC = () => {
                     {/* Sidebar Settings */}
                     <div className="space-y-6">
                         <section>
-                             <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">Workspace & Billing</h2>
-                             <div className="bg-slate-900 border border-slate-800 rounded-xl p-2 space-y-1">
-                                <button onClick={() => appStore.showToast('Billing page not implemented', 'info')} className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 flex items-center gap-3 text-slate-300 transition-colors">
+                             <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">Workspace & Billing</h2>
+                             <div className="bg-dark-indigo-glow border border-white/5 rounded-xl p-2 space-y-1">
+                                <button onClick={() => appStore.showToast('Billing page not implemented', 'info')} className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 flex items-center gap-3 text-slate-300 transition-colors">
                                     <CreditCard size={18} className="text-slate-500" /> Billing & Invoices
                                 </button>
-                                <button onClick={() => appStore.showToast('Token management not implemented', 'info')} className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 flex items-center gap-3 text-slate-300 transition-colors">
+                                <button onClick={() => appStore.showToast('Token management not implemented', 'info')} className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 flex items-center gap-3 text-slate-300 transition-colors">
                                     <Key size={18} className="text-slate-500" /> API Access Tokens
                                 </button>
-                                <button onClick={() => appStore.showToast('Notification preferences not implemented', 'info')} className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 flex items-center gap-3 text-slate-300 transition-colors">
+                                <button onClick={() => appStore.showToast('Notification preferences not implemented', 'info')} className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 flex items-center gap-3 text-slate-300 transition-colors">
                                     <Bell size={18} className="text-slate-500" /> Notifications
                                 </button>
                              </div>

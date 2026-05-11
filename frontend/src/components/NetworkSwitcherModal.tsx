@@ -30,17 +30,17 @@ export const NetworkSwitcherModal: React.FC<NetworkSwitcherModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-[#0c0c0e] border border-slate-800 rounded-2xl shadow-2xl w-full max-w-md overtxio-hidden relative group">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-near-black/60 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="bg-[#0c0c0e] border border-white/5 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden relative group">
           {/* Background Gradients */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sui-500 to-transparent opacity-50"></div>
-          <div className="absolute -top-20 -right-20 w-40 h-40 bg-sui-500/10 blur-3xl rounded-full pointer-events-none"></div>
+          <div className="absolute -top-20 -right-20 w-40 h-40 bg-electric-violet/10 blur-3xl rounded-full pointer-events-none"></div>
           <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-500/10 blur-3xl rounded-full pointer-events-none"></div>
 
           <div className="p-8 relative z-10">
               <div className="text-center mb-8">
-                  <div className="w-12 h-12 bg-slate-900 rounded-2xl border border-slate-800 flex items-center justify-center mx-auto mb-4 shadow-inner">
-                      <Server size={24} className="text-sui-400" />
+                  <div className="w-12 h-12 bg-dark-indigo-glow rounded-2xl border border-white/5 flex items-center justify-center mx-auto mb-4 shadow-inner">
+                      <Server size={24} className="text-electric-violet" />
                   </div>
                   <h2 className="text-lg font-bold text-white mb-1">Switch Network Environment</h2>
                   <p className="text-xs text-slate-500">Confirm transition to a new blockchain network.</p>
@@ -63,7 +63,7 @@ export const NetworkSwitcherModal: React.FC<NetworkSwitcherModalProps> = ({
                        <div className="relative w-full h-px bg-slate-800">
                            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-0.5 bg-gradient-to-r from-transparent via-sui-500 to-transparent opacity-50 animate-pulse"></div>
                        </div>
-                       <div className="mt-2 bg-slate-900 border border-slate-800 px-2 py-1 rounded text-[9px] text-slate-500 font-mono flex items-center gap-1">
+                       <div className="mt-2 bg-dark-indigo-glow border border-white/5 px-2 py-1 rounded text-[9px] text-slate-500 font-mono flex items-center gap-1">
                            Connecting <span className="animate-pulse">...</span>
                        </div>
                   </div>
@@ -91,10 +91,10 @@ export const NetworkSwitcherModal: React.FC<NetworkSwitcherModalProps> = ({
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                  <button onClick={onClose} className="px-4 py-3 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white text-xs font-bold rounded-xl transition-all">
+                  <button onClick={onClose} className="px-4 py-3 bg-dark-indigo-glow border border-white/5 hover:bg-white/5 text-slate-400 hover:text-white text-xs font-bold rounded-xl transition-all">
                       Cancel Request
                   </button>
-                  <button onClick={onConfirm} className="px-4 py-3 bg-sui-600 hover:bg-sui-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-sui-900/20 flex items-center justify-center gap-2 transition-all active:scale-95">
+                  <button onClick={onConfirm} className="px-4 py-3 bg-electric-violet hover:bg-electric-violet text-white text-xs font-bold rounded-xl shadow-lg shadow-sui-900/20 flex items-center justify-center gap-2 transition-all active:scale-95">
                       Confirm Switch <ArrowRight size={14} />
                   </button>
               </div>

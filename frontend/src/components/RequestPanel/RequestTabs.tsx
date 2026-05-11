@@ -26,7 +26,7 @@ export const RequestTabs: React.FC<RequestTabsProps> = ({
   ];
 
   return (
-    <div className="border-b border-white/10 px-4 flex justify-between bg-black items-center h-10">
+    <div className="border-b border-white/10 px-4 flex justify-between bg-near-black items-center h-10">
       <div className="flex gap-6 h-full">
         {tabs.map((tab) => (
           <button 
@@ -34,7 +34,7 @@ export const RequestTabs: React.FC<RequestTabsProps> = ({
             onClick={() => onTabChange(tab.id)}
             className={`h-full text-[10px] font-bold uppercase tracking-widest border-b-2 transition-all flex items-center gap-2 ${
               activeTab === tab.id 
-                ? 'border-sui-500 text-sui-400' 
+                ? 'border-sui-500 text-electric-violet' 
                 : 'border-transparent text-slate-500 hover:text-slate-300'
             }`}
           >

@@ -43,13 +43,13 @@ export const EnvironmentList: React.FC<EnvironmentListProps> = ({
         <div 
           key={i} 
           className={`
-            group rounded-xl border transition-all duration-200 relative overtxio-hidden
+            group rounded-xl border transition-all duration-200 relative overflow-hidden
             ${v.enabled 
               ? 'bg-white/[0.02] border-white/10 hover:border-white/20' 
               : 'bg-transparent border-white/5 opacity-50 grayscale'}
           `}
         >
-          <div className={`absolute left-0 top-0 bottom-0 w-0.5 transition-colors ${v.enabled ? 'bg-sui-500' : 'bg-slate-800'}`}></div>
+          <div className={`absolute left-0 top-0 bottom-0 w-0.5 transition-colors ${v.enabled ? 'bg-electric-violet' : 'bg-slate-800'}`}></div>
 
           <div className="flex flex-col gap-1 p-2 pl-3">
             <div className="flex items-center justify-between gap-2">
@@ -65,7 +65,7 @@ export const EnvironmentList: React.FC<EnvironmentListProps> = ({
               <div className="flex items-center gap-1">
                 <div className="relative">
                   <select 
-                    className={`appearance-none bg-black border border-white/10 rounded px-1.5 py-0.5 text-[9px] font-bold uppercase outline-none cursor-pointer hover:border-white/20 transition-colors ${
+                    className={`appearance-none bg-near-black border border-white/10 rounded px-1.5 py-0.5 text-[9px] font-bold uppercase outline-none cursor-pointer hover:border-white/20 transition-colors ${
                       v.network === 'mainnet' ? 'text-emerald-400' :
                       v.network === 'testnet' ? 'text-amber-400' :
                       v.network === 'devnet' ? 'text-blue-400' : 'text-slate-400'
@@ -90,7 +90,7 @@ export const EnvironmentList: React.FC<EnvironmentListProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-2 bg-black/40 rounded border border-white/5 focus-within:border-white/10 transition-colors">
+            <div className="flex items-center gap-2 bg-near-black/40 rounded border border-white/5 focus-within:border-white/10 transition-colors">
               <input 
                 type={visibleValues[i] ? "text" : "password"}
                 className="w-full bg-transparent px-2 py-1.5 text-[10px] font-mono text-slate-300 outline-none placeholder:text-slate-700"
@@ -119,7 +119,7 @@ export const EnvironmentList: React.FC<EnvironmentListProps> = ({
       
       <button 
         onClick={addNewVariable} 
-        className="w-full py-3 border border-dashed border-white/10 text-slate-500 hover:text-sui-400 hover:border-sui-500/50 hover:bg-white/[0.02] rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 group"
+        className="w-full py-3 border border-dashed border-white/10 text-slate-500 hover:text-electric-violet hover:border-sui-500/50 hover:bg-white/[0.02] rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 group"
       >
         <Plus size={12} className="group-hover:scale-110 transition-transform"/> Add Variable
       </button>

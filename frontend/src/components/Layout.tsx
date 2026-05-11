@@ -93,7 +93,7 @@ export const Layout: React.FC<LayoutProps> = ({
     };
 
     return (
-        <div className="flex flex-col h-screen bg-black text-slate-200 overtxio-hidden font-sans relative selection:bg-sui-500/30">
+        <div className="flex flex-col h-screen bg-near-black text-slate-200 overflow-hidden font-sans relative selection:bg-electric-violet/30">
             <CommandPalette />
 
             {/* Top Energy Line */}
@@ -103,7 +103,7 @@ export const Layout: React.FC<LayoutProps> = ({
             <div className="fixed top-16 right-6 z-[120] flex flex-col gap-3 pointer-events-none">
                 {notifications.map(n => (
                     <div key={n.id} className="animate-in slide-in-from-right-10 fade-in duration-300 pointer-events-auto">
-                        <div className="bg-[#0A0A0A] border border-white/10 text-slate-200 px-4 py-3 rounded-lg shadow-2xl flex items-center gap-3 min-w-[300px]">
+                        <div className="bg-dark-indigo-glow border border-white/10 text-slate-200 px-4 py-3 rounded-lg shadow-2xl flex items-center gap-3 min-w-[300px]">
                             {n.type === 'success' && <CheckCircle size={16} className="text-emerald-400" />}
                             {n.type === 'error' && <AlertCircle size={16} className="text-red-400" />}
                             {n.type === 'info' && <Info size={16} className="text-blue-400" />}
@@ -114,16 +114,16 @@ export const Layout: React.FC<LayoutProps> = ({
             </div>
 
             {isSyncing && (
-                <div className="fixed inset-0 z-[110] bg-black/90 backdrop-blur-md flex flex-col items-center justify-center animate-in fade-in duration-300">
+                <div className="fixed inset-0 z-[110] bg-near-black/90 backdrop-blur-md flex flex-col items-center justify-center animate-in fade-in duration-300">
                     <div className="relative">
-                        <Loader2 className="text-sui-400 animate-spin mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]" size={48} />
-                        <div className="absolute inset-0 bg-sui-400/20 blur-xl rounded-full animate-pulse"></div>
+                        <Loader2 className="text-electric-violet animate-spin mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]" size={48} />
+                        <div className="absolute inset-0 bg-electric-violet/20 blur-xl rounded-full animate-pulse"></div>
                     </div>
                     <p className="text-white text-sm font-mono tracking-wider font-bold">{scanStep || 'Syncing...'}</p>
                 </div>
             )}
 
-            <header className="h-12 bg-black border-b border-white/10 flex items-center justify-between px-4 shrink-0 z-20">
+            <header className="h-12 bg-near-black border-b border-white/10 flex items-center justify-between px-4 shrink-0 z-20">
                 <div className="flex items-center gap-4">
                     <div 
                         className="flex items-center gap-2 font-bold text-slate-100 group cursor-pointer"
@@ -135,14 +135,14 @@ export const Layout: React.FC<LayoutProps> = ({
                         <span className="text-sm tracking-tight group-hover:text-sui-300 transition-colors">txio</span>
                     </div>
                     <div className="h-4 w-px bg-white/10 mx-2"></div>
-                    <button onClick={() => appStore.toggleSidebar()} className={`p-1.5 rounded hover:bg-white/10 transition-colors ${isSidebarOpen ? 'text-sui-400' : 'text-slate-500'}`}>
+                    <button onClick={() => appStore.toggleSidebar()} className={`p-1.5 rounded hover:bg-white/10 transition-colors ${isSidebarOpen ? 'text-electric-violet' : 'text-slate-500'}`}>
                         <PanelLeft size={16} />
                     </button>
                     <button 
                         onClick={() => appStore.setCommandPalette(true)}
-                        className="flex items-center gap-2 bg-[#0A0A0A] border border-white/5 hover:border-white/20 hover:bg-[#111] px-3 py-1.5 rounded-full text-xs text-slate-400 w-64 transition-all group shadow-inner"
+                        className="flex items-center gap-2 bg-dark-indigo-glow border border-white/5 hover:border-white/20 hover:bg-[#111] px-3 py-1.5 rounded-full text-xs text-slate-400 w-64 transition-all group shadow-inner"
                     >
-                        <Search size={12} className="group-hover:text-sui-400" />
+                        <Search size={12} className="group-hover:text-electric-violet" />
                         <span>Search commands...</span>
                         <div className="ml-auto flex items-center gap-1">
                             <span className="bg-white/5 px-1 rounded text-[10px] text-slate-500 group-hover:text-slate-300">⌘</span>
@@ -155,7 +155,7 @@ export const Layout: React.FC<LayoutProps> = ({
                     <div className="relative" ref={networkMenuRef}>
                         <button 
                             onClick={() => setIsNetworkMenuOpen(!isNetworkMenuOpen)}
-                            className={`flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A0A0A] border border-white/10 text-xs hover:bg-[#111] transition-all hover:border-white/20 shadow-sm ${isNetworkMenuOpen ? 'border-slate-600 bg-slate-800' : ''}`}
+                            className={`flex items-center gap-2 px-3 py-1 rounded-full bg-dark-indigo-glow border border-white/10 text-xs hover:bg-[#111] transition-all hover:border-white/20 shadow-sm ${isNetworkMenuOpen ? 'border-slate-600 bg-slate-800' : ''}`}
                         >
                             <div className={`w-2 h-2 rounded-full ${healthStatus === 'healthy' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-amber-500'} animate-pulse`}></div>
                             <span className="text-slate-300 capitalize font-medium">{network}</span>
@@ -163,7 +163,7 @@ export const Layout: React.FC<LayoutProps> = ({
                         </button>
 
                         {isNetworkMenuOpen && (
-                            <div className="absolute top-full right-0 mt-2 w-48 bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl overtxio-hidden z-50 animate-in fade-in zoom-in-95 duration-100">
+                            <div className="absolute top-full right-0 mt-2 w-48 bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-100">
                                 <div className="p-1">
                                     {(['mainnet', 'testnet', 'devnet'] as Network[]).map((net) => (
                                         <button
@@ -183,11 +183,11 @@ export const Layout: React.FC<LayoutProps> = ({
                                                 }`}></div>
                                                 {net}
                                             </div>
-                                            {network === net && <Check size={12} className="text-sui-400" />}
+                                            {network === net && <Check size={12} className="text-electric-violet" />}
                                         </button>
                                     ))}
                                 </div>
-                                <div className="border-t border-white/10 p-2 bg-black/20">
+                                <div className="border-t border-white/10 p-2 bg-near-black/20">
                                     <div className="flex justify-between text-[9px] text-slate-500 font-mono">
                                         <span>Latency</span>
                                         <span className={healthStatus === 'healthy' ? 'text-emerald-500' : 'text-amber-500'}>
@@ -199,25 +199,25 @@ export const Layout: React.FC<LayoutProps> = ({
                         )}
                     </div>
                     
-                    <button onClick={() => appStore.toggleInspector()} className={`p-1.5 rounded hover:bg-white/10 transition-colors ${isInspectorOpen ? 'text-sui-400' : 'text-slate-500'}`}>
+                    <button onClick={() => appStore.toggleInspector()} className={`p-1.5 rounded hover:bg-white/10 transition-colors ${isInspectorOpen ? 'text-electric-violet' : 'text-slate-500'}`}>
                         <PanelRight size={16} />
                     </button>
                     
-                    <button onClick={() => appStore.setAuthModal(true)} className="w-8 h-8 cursor-pointer hover:ring-2 ring-sui-500/50 rounded-xl transition-all">
+                    <button onClick={() => appStore.setAuthModal(true)} className="w-8 h-8 cursor-pointer hover:ring-2 ring-electric-violet/50 rounded-xl transition-all">
                         <Avatar size="sm" src={user?.avatarUrl} />
                     </button>
                 </div>
             </header>
 
-            <div className="flex-1 flex overtxio-hidden">
+            <div className="flex-1 flex overflow-hidden">
                 {isSidebarOpen && (
-                    <aside className="w-64 flex flex-col shrink-0 z-10 bg-black">
+                    <aside className="w-64 flex flex-col shrink-0 z-10 bg-near-black">
                         {sidebar}
                     </aside>
                 )}
 
-                <main className="flex-1 flex flex-col min-w-0 bg-[#050505] relative">
-                    <div className="h-9 bg-black border-b border-white/10 flex items-center overtxio-x-auto no-scrollbar">
+                <main className="flex-1 flex flex-col min-w-0 bg-near-black relative">
+                    <div className="h-9 bg-near-black border-b border-white/10 flex items-center overflow-x-auto no-scrollbar">
                         {tabs.map(tab => (
                             <Tab 
                                 key={tab.id}
@@ -227,34 +227,34 @@ export const Layout: React.FC<LayoutProps> = ({
                                 onSelect={() => onSelectTab && onSelectTab(tab.id)}
                                 onClose={() => onCloseTab && onCloseTab(tab.id)}
                                 onRename={(newTitle) => onRenameTab && onRenameTab(tab.id, newTitle)}
-                                icon={tab.type === 'ptb' ? <Layers size={12}/> : tab.type === 'rpc' ? <Command size={12}/> : tab.type === 'ai_chat' ? <Sparkles size={12} className="text-sui-400"/> : undefined}
+                                icon={tab.type === 'ptb' ? <Layers size={12}/> : tab.type === 'rpc' ? <Command size={12}/> : tab.type === 'ai_chat' ? <Sparkles size={12} className="text-electric-violet"/> : undefined}
                             />
                         ))}
                         <button 
                             onClick={onNewTab}
-                            className="p-2 text-slate-500 hover:text-sui-400 hover:bg-white/5 transition-colors"
+                            className="p-2 text-slate-500 hover:text-electric-violet hover:bg-white/5 transition-colors"
                         >
                             <Plus size={14} />
                         </button>
                     </div>
                     
-                    <div className="flex-1 overtxio-hidden relative">
+                    <div className="flex-1 overflow-hidden relative">
                         {workspace}
                     </div>
                 </main>
 
                 {isInspectorOpen && (
-                    <aside className="w-80 bg-black border-l border-white/10 flex flex-col shrink-0 z-10 shadow-2xl">
+                    <aside className="w-80 bg-near-black border-l border-white/10 flex flex-col shrink-0 z-10 shadow-2xl">
                         {inspector}
                     </aside>
                 )}
             </div>
             
-            <footer className="h-7 bg-black border-t border-white/10 flex items-center justify-between px-3 text-[10px] text-slate-500 select-none z-20">
+            <footer className="h-7 bg-near-black border-t border-white/10 flex items-center justify-between px-3 text-[10px] text-slate-500 select-none z-20">
                 <div className="flex items-center gap-4">
                     <span 
                         onClick={() => appStore.openTab('settings')}
-                        className="flex items-center gap-1 hover:text-sui-400 cursor-pointer transition-colors"
+                        className="flex items-center gap-1 hover:text-electric-violet cursor-pointer transition-colors"
                     >
                         <Settings size={10} /> v2.6.0-beta
                     </span>

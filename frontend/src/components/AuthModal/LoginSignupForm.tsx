@@ -42,7 +42,7 @@ export const LoginSignupForm: React.FC<LoginSignupFormProps> = ({
               <input 
                 type="text" 
                 required 
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:border-sui-500 focus:ring-1 focus:ring-sui-500/50 outline-none transition-all" 
+                className="w-full bg-near-black border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:border-electric-violet focus:ring-1 focus:ring-electric-violet/50 outline-none transition-all" 
                 placeholder="John Doe" 
                 value={formData.name} 
                 onChange={e => setFormData({...formData, name: e.target.value})} 
@@ -58,7 +58,7 @@ export const LoginSignupForm: React.FC<LoginSignupFormProps> = ({
             <input 
               type="email" 
               required 
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:border-sui-500 focus:ring-1 focus:ring-sui-500/50 outline-none transition-all" 
+              className="w-full bg-near-black border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:border-electric-violet focus:ring-1 focus:ring-electric-violet/50 outline-none transition-all" 
               placeholder="name@example.com" 
               value={formData.email} 
               onChange={e => setFormData({...formData, email: e.target.value})} 
@@ -73,7 +73,7 @@ export const LoginSignupForm: React.FC<LoginSignupFormProps> = ({
             <input 
               type="password" 
               required 
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:border-sui-500 focus:ring-1 focus:ring-sui-500/50 outline-none transition-all" 
+              className="w-full bg-near-black border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:border-electric-violet focus:ring-1 focus:ring-electric-violet/50 outline-none transition-all" 
               placeholder="••••••••" 
               value={formData.password} 
               onChange={e => setFormData({...formData, password: e.target.value})} 
@@ -83,20 +83,20 @@ export const LoginSignupForm: React.FC<LoginSignupFormProps> = ({
         
         <button 
           type="submit" 
-          className="w-full bg-sui-600 hover:bg-sui-500 text-white font-bold py-2.5 rounded-lg transition-all shadow-lg shadow-sui-900/50 mt-6 flex items-center justify-center gap-2"
+          className="w-full bg-electric-violet hover:bg-electric-violet text-white font-bold py-2.5 rounded-lg transition-all shadow-lg shadow-sui-900/50 mt-6 flex items-center justify-center gap-2"
         >
           {mode === 'login' ? 'Sign In' : 'Create Account'} 
           <ArrowRight size={16} />
         </button>
       </form>
       
-      <div className="mt-6 pt-6 border-t border-slate-800 text-center">
+      <div className="mt-6 pt-6 border-t border-white/5 text-center">
         <button 
           onClick={() => onModeChange(mode === 'login' ? 'signup' : 'login')} 
           className="text-sm text-slate-400 hover:text-white transition-colors"
         >
           {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
-          <span className="text-sui-400 font-bold hover:underline">
+          <span className="text-electric-violet font-bold hover:underline">
             {mode === 'login' ? 'Sign Up' : 'Log In'}
           </span>
         </button>

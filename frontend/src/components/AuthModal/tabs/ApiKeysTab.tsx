@@ -57,7 +57,7 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
         </div>
         <button 
           onClick={() => setIsCreatingKey(true)} 
-          className="px-3 py-1.5 bg-sui-600 hover:bg-sui-500 text-white text-xs font-bold rounded flex items-center gap-2"
+          className="px-3 py-1.5 bg-electric-violet hover:bg-electric-violet text-white text-xs font-bold rounded flex items-center gap-2"
         >
           <Plus size={14} /> <span className="hidden sm:inline">Create Key</span>
         </button>
@@ -70,7 +70,7 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
           </div>
           <p className="text-xs text-slate-400">Save this key now. You won't be able to see it again.</p>
           <div className="flex gap-2">
-            <code className="flex-1 bg-black/50 p-2 rounded text-emerald-200 font-mono text-xs border border-emerald-900/30 break-all">
+            <code className="flex-1 bg-near-black/50 p-2 rounded text-emerald-200 font-mono text-xs border border-emerald-900/30 break-all">
               {generatedKey}
             </code>
             <button 
@@ -90,13 +90,13 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
       )}
 
       {isCreatingKey && (
-        <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl animate-in fade-in slide-in-from-top-2">
+        <div className="bg-near-black border border-white/5 p-4 rounded-xl animate-in fade-in slide-in-from-top-2">
           <h3 className="text-sm font-bold text-white mb-3">Create New API Key</h3>
           <div className="space-y-3">
             <div>
               <label className="text-xs font-bold text-slate-500 uppercase block mb-1">Key Name</label>
               <input 
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:border-sui-500 outline-none" 
+                className="w-full bg-dark-indigo-glow border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-electric-violet outline-none" 
                 placeholder="e.g. Production CI"
                 value={newKeyName}
                 onChange={(e) => setNewKeyName(e.target.value)}
@@ -113,7 +113,7 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
               <button 
                 onClick={handleCreateKey} 
                 disabled={!newKeyName.trim()} 
-                className="px-3 py-1.5 bg-sui-600 hover:bg-sui-500 disabled:opacity-50 text-white text-xs font-bold rounded"
+                className="px-3 py-1.5 bg-electric-violet hover:bg-electric-violet disabled:opacity-50 text-white text-xs font-bold rounded"
               >
                 Generate
               </button>
@@ -122,9 +122,9 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
         </div>
       )}
 
-      <div className="border border-slate-800 rounded-lg overtxio-x-auto bg-slate-950">
+      <div className="border border-white/5 rounded-lg overflow-x-auto bg-near-black">
         <table className="w-full text-left text-sm min-w-[600px]">
-          <thead className="bg-slate-900 border-b border-slate-800 text-xs text-slate-500 uppercase font-medium">
+          <thead className="bg-dark-indigo-glow border-b border-white/5 text-xs text-slate-500 uppercase font-medium">
             <tr>
               <th className="px-4 py-3">Name</th>
               <th className="px-4 py-3">Key Prefix</th>
@@ -135,7 +135,7 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
           </thead>
           <tbody className="divide-y divide-slate-800">
             {apiKeys.map((key) => (
-              <tr key={key.id} className="group hover:bg-slate-900/50 transition-colors">
+              <tr key={key.id} className="group hover:bg-dark-indigo-glow/50 transition-colors">
                 <td className="px-4 py-3 font-medium text-slate-200">{key.name}</td>
                 <td className="px-4 py-3 font-mono text-slate-500 text-xs">{key.prefix}</td>
                 <td className="px-4 py-3 text-xs text-slate-500">
@@ -147,7 +147,7 @@ export const ApiKeysTab: React.FC<ApiKeysTabProps> = ({
                       Active
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-[10px] font-bold border border-slate-700">
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-[10px] font-bold border border-white/10">
                       Revoked
                     </span>
                   )}
