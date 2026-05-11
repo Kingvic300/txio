@@ -19,10 +19,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 }) => {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [activeTab, setActiveTab] = useState<ProfileTab>('general');
-  const [apiKeys, setApiKeys] = useState<ApiKey[]>([
-    { id: '1', name: 'Development Key', prefix: 'sui_sk_live_8...3a21', created: Date.now() - 86400000 * 5, lastUsed: '2 hours ago', status: 'active' },
-    { id: '2', name: 'Legacy CI', prefix: 'sui_sk_test_9...1b99', created: Date.now() - 86400000 * 30, lastUsed: 'Never', status: 'revoked' }
-  ]);
+  const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
 
   if (!isOpen) return null;
 
@@ -52,16 +49,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200 font-sans">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-near-black/70 backdrop-blur-sm animate-in fade-in duration-200 font-sans">
       <div 
-        className={`bg-slate-900 border border-slate-700 rounded-xl shadow-2xl w-full overtxio-hidden relative transition-all duration-300 flex flex-col ${
+        className={`bg-dark-indigo-glow border border-white/10 rounded-xl shadow-2xl w-full overflow-hidden relative transition-all duration-300 flex flex-col ${
           user ? 'max-w-4xl h-[85vh] md:h-[600px]' : 'max-w-md h-auto'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 text-slate-500 hover:text-white transition-colors bg-slate-900/50 p-1 rounded-full hover:bg-slate-800"
+          className="absolute top-4 right-4 z-10 text-slate-500 hover:text-white transition-colors bg-dark-indigo-glow/50 p-1 rounded-full hover:bg-white/5"
         >
           <X size={20} />
         </button>
@@ -75,7 +72,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               onLogout={onLogout}
             />
             
-            <div className="flex-1 bg-slate-900 p-6 md:p-8 overtxio-y-auto custom-scrollbar">
+            <div className="flex-1 bg-dark-indigo-glow p-6 md:p-8 overflow-y-auto custom-scrollbar">
               {renderTabContent()}
             </div>
           </div>

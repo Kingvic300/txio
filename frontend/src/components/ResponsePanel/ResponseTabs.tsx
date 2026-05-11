@@ -22,7 +22,7 @@ export const ResponseTabs: React.FC<ResponseTabsProps> = ({
   ];
 
   return (
-    <div className="flex bg-black px-4 border-b border-white/10 shrink-0">
+    <div className="flex bg-near-black px-4 border-b border-white/10 shrink-0">
       {tabs.map(tab => (
         <button 
           key={tab.id}

@@ -120,8 +120,8 @@ export const CollectionTree: React.FC<CollectionTreeProps> = ({
     <div className="flex-1 pb-4 px-2">
       {isAddingCollection && (
         <div className="mb-2 px-1 animate-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center gap-2 bg-slate-900/80 p-1.5 rounded-lg border border-sui-500/50 ring-1 ring-sui-500/20 shadow-lg">
-            <Folder size={14} className="text-sui-400 shrink-0" />
+          <div className="flex items-center gap-2 bg-dark-indigo-glow/80 p-1.5 rounded-lg border border-sui-500/50 ring-1 ring-electric-violet/20 shadow-lg">
+            <Folder size={14} className="text-electric-violet shrink-0" />
             <input 
               ref={createInputRef} 
               className="bg-transparent text-xs text-white outline-none flex-1 min-w-0 placeholder:text-slate-500 font-medium" 

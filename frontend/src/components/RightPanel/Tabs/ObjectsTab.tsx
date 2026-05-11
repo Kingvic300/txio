@@ -48,16 +48,16 @@ export const ObjectsTab: React.FC<ObjectsTabProps> = ({
   if (selectedObject) {
     return (
       <div className="flex-1 flex flex-col animate-in slide-in-from-right-4 duration-200">
-        <div className="shrink-0 flex items-center gap-2 p-3 border-b border-white/10 bg-black/50">
+        <div className="shrink-0 flex items-center gap-2 p-3 border-b border-white/10 bg-near-black/50">
           <button onClick={() => setSelectedObject(null)} className="p-1 hover:bg-white/10 rounded text-slate-400 hover:text-white transition-colors">
             <ChevronLeft size={16} />
           </button>
           <span className="text-xs font-bold text-white">Object Details</span>
         </div>
-        <div className="flex-1 overtxio-auto custom-scrollbar p-0 bg-[#0c0c0e]">
+        <div className="flex-1 overflow-auto custom-scrollbar p-0 bg-[#0c0c0e]">
           <div className="p-4 border-b border-white/10">
             <label className="text-[10px] uppercase font-black text-slate-600 tracking-widest block mb-1">Object ID</label>
-            <div className="text-xs font-mono text-sui-400 break-all select-all">{selectedObject.objectId || selectedObject.data?.objectId}</div>
+            <div className="text-xs font-mono text-electric-violet break-all select-all">{selectedObject.objectId || selectedObject.data?.objectId}</div>
           </div>
           <div className="p-4 border-b border-white/10">
             <label className="text-[10px] uppercase font-black text-slate-600 tracking-widest block mb-1">Type</label>
@@ -65,7 +65,7 @@ export const ObjectsTab: React.FC<ObjectsTabProps> = ({
           </div>
           <div className="p-4">
             <label className="text-[10px] uppercase font-black text-slate-600 tracking-widest block mb-2">Raw Content</label>
-            <pre className="text-[10px] font-mono text-slate-400 overtxio-x-auto bg-black p-3 rounded-lg border border-white/10">
+            <pre className="text-[10px] font-mono text-slate-400 overflow-x-auto bg-near-black p-3 rounded-lg border border-white/10">
               {JSON.stringify(selectedObject, null, 2)}
             </pre>
           </div>
@@ -80,19 +80,19 @@ export const ObjectsTab: React.FC<ObjectsTabProps> = ({
         <div className="relative flex-1">
           <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500" />
           <input 
-            className="w-full bg-black border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white focus:border-sui-500 outline-none transition-all placeholder:text-slate-600"
+            className="w-full bg-near-black border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white focus:border-electric-violet outline-none transition-all placeholder:text-slate-600"
             placeholder="Search Object ID..."
             value={objectSearch}
             onChange={(e) => setObjectSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleObjectSearch()}
           />
         </div>
-        <button onClick={onRefreshObjects} className="p-1.5 bg-black border border-white/10 rounded-lg text-slate-400 hover:text-white hover:border-white/20 transition-colors">
+        <button onClick={onRefreshObjects} className="p-1.5 bg-near-black border border-white/10 rounded-lg text-slate-400 hover:text-white hover:border-white/20 transition-colors">
           <RefreshCw size={14} className={loadingObjects ? 'animate-spin' : ''} />
         </button>
       </div>
       
-      <div className="flex-1 overtxio-y-auto custom-scrollbar p-2 space-y-1">
+      <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
         {objects.map((obj, i) => {
           const type = obj.data?.type || '';
           const isCoin = type.includes('::coin::Coin');

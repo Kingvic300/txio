@@ -20,7 +20,7 @@ export const MetaView: React.FC<MetaViewProps> = ({
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-black border border-white/10 rounded-2xl p-6">
+        <div className="bg-near-black border border-white/10 rounded-2xl p-6">
           <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-2">
             <Server size={14}/> RPC Connection
           </h4>
@@ -34,7 +34,7 @@ export const MetaView: React.FC<MetaViewProps> = ({
           </div>
         </div>
         
-        <div className="bg-black border border-white/10 rounded-2xl p-6">
+        <div className="bg-near-black border border-white/10 rounded-2xl p-6">
           <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">
             Finality
           </h4>
@@ -45,7 +45,7 @@ export const MetaView: React.FC<MetaViewProps> = ({
       </div>
 
       {testResults.length > 0 && (
-        <div className="bg-black border border-white/10 rounded-2xl p-6">
+        <div className="bg-near-black border border-white/10 rounded-2xl p-6">
           <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">
             Test Results
           </h4>
@@ -72,7 +72,7 @@ export const MetaView: React.FC<MetaViewProps> = ({
       )}
 
       {gasSummary && (
-        <div className="bg-black border border-white/10 rounded-2xl p-6">
+        <div className="bg-near-black border border-white/10 rounded-2xl p-6">
           <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">
             Gas Breakdown (MIST)
           </h4>

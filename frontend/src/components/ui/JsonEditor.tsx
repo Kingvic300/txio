@@ -250,15 +250,15 @@ export const JsonEditor: React.FC<JsonEditorProps> = ({
   const lineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1).join('\n');
 
   return (
-    <div className="flex flex-col h-full bg-[#0c0c0e] rounded-xl border border-slate-800/80 overtxio-hidden shadow-inner group focus-within:border-slate-700/80 focus-within:ring-1 focus-within:ring-slate-800 transition-all">
+    <div className="flex flex-col h-full bg-[#0c0c0e] rounded-xl border border-white/5/80 overflow-hidden shadow-inner group focus-within:border-white/10/80 focus-within:ring-1 focus-within:ring-slate-800 transition-all">
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-3 py-2 bg-slate-900/50 border-b border-slate-800/50">
+      <div className="flex items-center justify-between px-3 py-2 bg-dark-indigo-glow/50 border-b border-white/5/50">
         <div className="flex items-center gap-1">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mr-2">JSON Editor</span>
-            <button onClick={handleFormat} className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-sui-400 rounded transition-colors" title="Format">
+            <button onClick={handleFormat} className="p-1.5 hover:bg-white/5 text-slate-400 hover:text-electric-violet rounded transition-colors" title="Format">
                 <AlignLeft size={12} />
             </button>
-            <button onClick={handleMinify} className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-sui-400 rounded transition-colors" title="Minify">
+            <button onClick={handleMinify} className="p-1.5 hover:bg-white/5 text-slate-400 hover:text-electric-violet rounded transition-colors" title="Minify">
                 <Minimize2 size={12} />
             </button>
         </div>
@@ -268,10 +268,10 @@ export const JsonEditor: React.FC<JsonEditorProps> = ({
                     <AlertCircle size={10} /> Invalid JSON
                 </div>
             )}
-            <button onClick={handleCopy} className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-white rounded transition-colors" title="Copy">
+            <button onClick={handleCopy} className="p-1.5 hover:bg-white/5 text-slate-400 hover:text-white rounded transition-colors" title="Copy">
                 {copied ? <Check size={12} className="text-emerald-500"/> : <Copy size={12} />}
             </button>
-            <button onClick={handleClear} className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-red-400 rounded transition-colors" title="Clear">
+            <button onClick={handleClear} className="p-1.5 hover:bg-white/5 text-slate-400 hover:text-red-400 rounded transition-colors" title="Clear">
                 <Trash2 size={12} />
             </button>
         </div>
@@ -279,12 +279,12 @@ export const JsonEditor: React.FC<JsonEditorProps> = ({
 
       <div className="relative flex-1 min-h-0 group/editor">
         {/* Line Numbers */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 bg-slate-900/30 text-right pr-2 pt-4 text-[10px] font-mono text-slate-700 select-none overtxio-hidden border-r border-slate-800/30 leading-relaxed">
+        <div className="absolute left-0 top-0 bottom-0 w-8 bg-dark-indigo-glow/30 text-right pr-2 pt-4 text-[10px] font-mono text-slate-700 select-none overflow-hidden border-r border-white/5/30 leading-relaxed">
             <pre>{lineNumbers}</pre>
         </div>
 
         {/* Editor Area */}
-        <div className="absolute inset-0 left-8 overtxio-auto custom-scrollbar bg-[#050505]" onScroll={handleScroll}>
+        <div className="absolute inset-0 left-8 overflow-auto custom-scrollbar bg-near-black" onScroll={handleScroll}>
             {/* Syntax Highlight Layer */}
             <pre 
                 ref={preRef}

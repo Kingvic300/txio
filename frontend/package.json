@@ -16,6 +16,8 @@
     "@mysten/dapp-kit": "^0.19.8",
     "@mysten/sui": "^1.44.0",
     "@mysten/sui.js": "^0.54.1",
+    "@tanstack/react-query": "^5.100.9",
+    "framer-motion": "^12.38.0",
     "gsap": "^3.14.2",
     "lucide-react": "^0.556.0",
     "react": "^19.2.1",
@@ -24,15 +26,17 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "*",
-    "@rollup/rollup-linux-arm64-gnu": "*",
-    "@rollup/rollup-darwin-x64": "*",
     "@rollup/rollup-darwin-arm64": "*",
+    "@rollup/rollup-darwin-x64": "*",
+    "@rollup/rollup-linux-arm64-gnu": "*",
+    "@rollup/rollup-linux-x64-gnu": "*",
     "@rollup/rollup-win32-x64-msvc": "*"
   }
 }

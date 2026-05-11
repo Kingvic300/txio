@@ -9,8 +9,8 @@ services:
 
   api:
     build:
-      context: ./backend
-      dockerfile: api/Dockerfile
+      context: .
+      dockerfile: backend/api/Dockerfile
     container_name: txio-api
     environment:
       MONGO_URI: mongodb://mongodb:27017/txio

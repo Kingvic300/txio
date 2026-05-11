@@ -24,7 +24,7 @@ export const DiscussTab: React.FC<DiscussTabProps> = ({
 
   return (
     <div className="flex-1 flex flex-col min-h-0">
-      <div className="flex-1 overtxio-y-auto p-4 space-y-4 custom-scrollbar">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
         {comments.length === 0 ? (
           <div className="text-center mt-20 opacity-50">
             <MessageSquare size={24} className="mx-auto mb-2 text-slate-600"/>
@@ -48,10 +48,10 @@ export const DiscussTab: React.FC<DiscussTabProps> = ({
         )}
         <div ref={commentsEndRef} />
       </div>
-      <div className="p-3 border-t border-white/10 bg-black">
+      <div className="p-3 border-t border-white/10 bg-near-black">
         <form onSubmit={onSubmitComment} className="relative">
           <input 
-            className="w-full bg-[#050505] border border-white/10 rounded-lg py-2 pl-3 pr-10 text-xs text-white focus:border-sui-500 outline-none transition-all placeholder:text-slate-600"
+            className="w-full bg-near-black border border-white/10 rounded-lg py-2 pl-3 pr-10 text-xs text-white focus:border-electric-violet outline-none transition-all placeholder:text-slate-600"
             placeholder="Add a comment..."
             value={commentInput}
             onChange={(e) => onCommentInputChange(e.target.value)}

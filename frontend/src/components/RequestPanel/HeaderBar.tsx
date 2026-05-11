@@ -37,7 +37,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
   }, [network, endpoint]);
 
   return (
-    <div className="p-3 border-b border-white/10 bg-black/50 flex flex-wrap gap-3 items-center backdrop-blur-sm">
+    <div className="p-3 border-b border-white/10 bg-near-black/50 flex flex-wrap gap-3 items-center backdrop-blur-sm">
       <div className="w-full sm:w-40 shrink-0">
         <Select 
           value={requestType}
@@ -51,12 +51,12 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
       </div>
       
       {/* Enhanced Endpoint Context */}
-      <div className="flex-1 flex items-center bg-black border border-white/10 rounded-lg px-3 py-1.5 h-[38px] min-w-[200px] group focus-within:border-white/20 transition-colors">
+      <div className="flex-1 flex items-center bg-near-black border border-white/10 rounded-lg px-3 py-1.5 h-[38px] min-w-[200px] group focus-within:border-white/20 transition-colors">
         <div className="flex items-center gap-2 mr-3 border-r border-white/10 pr-3">
           <Server size={12} className="text-slate-500" />
           <span className="text-[10px] font-bold text-slate-300 uppercase">{network}</span>
         </div>
-        <div className="flex-1 flex items-center gap-2 overtxio-hidden">
+        <div className="flex-1 flex items-center gap-2 overflow-hidden">
           <span className="text-xs font-mono text-slate-500 truncate" title={endpoint}>{endpoint}</span>
         </div>
         {rpcHealth && (
@@ -73,7 +73,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
         <button 
           onClick={onSend}
           disabled={isLoading}
-          className={`h-[38px] bg-sui-600 hover:bg-sui-500 text-white px-5 rounded-lg font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-30 disabled:grayscale text-[10px] uppercase tracking-widest shadow-lg shadow-sui-900/40 active:scale-95 shrink-0 flex-1 sm:flex-initial`}
+          className={`h-[38px] bg-electric-violet hover:bg-electric-violet text-white px-5 rounded-lg font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-30 disabled:grayscale text-[10px] uppercase tracking-widest shadow-lg shadow-sui-900/40 active:scale-95 shrink-0 flex-1 sm:flex-initial`}
         >
           {isLoading ? <Loader2 size={14} className="animate-spin" /> : <Play size={14} fill="currentColor" />}
           {requestType === RequestType.RPC ? 'Send' : 'Simulate'}

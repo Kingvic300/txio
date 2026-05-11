@@ -23,37 +23,37 @@ export const ContextToolbar: React.FC<ContextToolbarProps> = ({
   };
 
   return (
-    <div className="px-4 py-3 flex items-center justify-between shrink-0 sticky top-0 z-30 bg-black">
-      <h2 className="font-black text-slate-400 text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 select-none">
+    <div className="px-4 py-4 flex items-center justify-between shrink-0 sticky top-0 z-30 bg-near-black/50 backdrop-blur-md">
+      <h2 className="font-black text-slate-500 text-[10px] uppercase tracking-[0.3em] flex items-center gap-2 select-none px-1">
         {renderTitle()}
       </h2>
       
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1.5">
         {mode === 'collections' && (
           <>
             <button 
               onClick={() => appStore.showToast('Filtering not implemented', 'info')} 
-              className="p-1.5 text-slate-500 hover:text-white rounded hover:bg-white/10 transition-colors" 
+              className="p-2 text-slate-500 hover:text-white rounded-xl hover:bg-white/[0.05] transition-all border border-transparent hover:border-white/5" 
               title="Filter"
             >
-              <Filter size={12}/>
+              <Filter size={14}/>
             </button>
             <button 
               onClick={onAddCollection} 
-              className="p-1.5 text-slate-500 hover:text-sui-400 rounded hover:bg-white/10 transition-colors" 
+              className="p-2 text-slate-500 hover:text-electric-violet rounded-xl hover:bg-white/[0.05] transition-all border border-transparent hover:border-white/5" 
               title="New Collection"
             >
-              <FolderPlus size={14}/>
+              <FolderPlus size={16}/>
             </button>
           </>
         )}
         {mode === 'env' && (
           <button 
             onClick={onAddEnvVar} 
-            className="p-1.5 text-slate-500 hover:text-sui-400 rounded hover:bg-white/10 transition-colors" 
+            className="p-2 text-slate-500 hover:text-electric-violet rounded-xl hover:bg-white/[0.05] transition-all border border-transparent hover:border-white/5" 
             title="Add Variable"
           >
-            <Plus size={14}/>
+            <Plus size={16}/>
           </button>
         )}
       </div>

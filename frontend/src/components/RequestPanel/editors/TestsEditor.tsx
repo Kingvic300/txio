@@ -70,7 +70,7 @@ export const TestsEditor: React.FC<TestsEditorProps> = ({ tests = [], onChange }
         </div>
         <button 
           onClick={addTest}
-          className="text-xs font-bold flex items-center gap-1.5 bg-sui-600 hover:bg-sui-500 text-white px-3 py-1.5 rounded transition-colors"
+          className="text-xs font-bold flex items-center gap-1.5 bg-electric-violet hover:bg-electric-violet text-white px-3 py-1.5 rounded transition-colors"
         >
           <Plus size={12} strokeWidth={3}/> Add Test
         </button>
@@ -78,7 +78,7 @@ export const TestsEditor: React.FC<TestsEditorProps> = ({ tests = [], onChange }
       
       <div className="space-y-3">
         {tests.map((test, idx) => (
-          <div key={test.id} className="group flex items-start gap-3 p-3 bg-[#0a0a0a] border border-white/10 rounded-lg hover:border-white/20 transition-all">
+          <div key={test.id} className="group flex items-start gap-3 p-3 bg-dark-indigo-glow border border-white/10 rounded-lg hover:border-white/20 transition-all">
             <div className="pt-2">
               <input 
                 type="checkbox" 
@@ -157,7 +157,7 @@ export const TestsEditor: React.FC<TestsEditorProps> = ({ tests = [], onChange }
                   {test.target === 'json_path' && (
                     <input 
                       placeholder="Path..." 
-                      className="w-1/2 bg-[#111] border border-white/10 rounded px-2 py-1.5 text-xs text-sui-400 font-mono outline-none focus:border-sui-500"
+                      className="w-1/2 bg-[#111] border border-white/10 rounded px-2 py-1.5 text-xs text-electric-violet font-mono outline-none focus:border-electric-violet"
                       value={test.value?.split('::')[0] || ''}
                       onChange={(e) => {
                         const val = test.value?.split('::')[1] || '';
@@ -168,7 +168,7 @@ export const TestsEditor: React.FC<TestsEditorProps> = ({ tests = [], onChange }
                   <input 
                     placeholder={test.operator === 'exists' ? 'N/A' : 'Value...'}
                     disabled={test.operator === 'exists' || test.operator === 'not_exists'}
-                    className={`flex-1 bg-[#111] border border-white/10 rounded px-2 py-1.5 text-xs text-white font-mono outline-none focus:border-sui-500 ${test.target === 'json_path' ? 'w-1/2' : 'w-full'}`}
+                    className={`flex-1 bg-[#111] border border-white/10 rounded px-2 py-1.5 text-xs text-white font-mono outline-none focus:border-electric-violet ${test.target === 'json_path' ? 'w-1/2' : 'w-full'}`}
                     value={test.target === 'json_path' ? (test.value?.split('::')[1] || '') : (test.value || '')}
                     onChange={(e) => {
                       if (test.target === 'json_path') {
@@ -189,13 +189,13 @@ export const TestsEditor: React.FC<TestsEditorProps> = ({ tests = [], onChange }
           </div>
         ))}
         {tests.length === 0 && (
-          <div className="text-center py-12 border-2 border-dashed border-slate-800 rounded-xl bg-white/[0.02]">
+          <div className="text-center py-12 border-2 border-dashed border-white/5 rounded-xl bg-white/[0.02]">
             <Beaker size={32} className="mx-auto text-slate-600 mb-3" />
             <p className="text-sm font-bold text-slate-400">No tests defined</p>
             <p className="text-xs text-slate-600 mt-1 max-w-sm mx-auto">
               Add tests to verify transaction status, gas usage, events, or specific data fields in the response.
             </p>
-            <button onClick={addTest} className="mt-4 text-xs font-bold text-sui-400 hover:text-sui-300">
+            <button onClick={addTest} className="mt-4 text-xs font-bold text-electric-violet hover:text-sui-300">
               + Create your first test
             </button>
           </div>

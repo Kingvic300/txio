@@ -61,4 +61,8 @@ pub struct UpdatePasswordRequest {
 pub struct SwitchNetworkRequest {
     pub network: crate::model::user::SuiNetwork,
 }
-
+#[derive(Debug, Deserialize, Validate)]
+pub struct TerminalCommandRequest {
+    #[validate(length(min = 1))]
+    pub command: String,
+}

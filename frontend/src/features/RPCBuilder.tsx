@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore, appStore } from '@/lib/store';
 import { RequestPanel } from '../components/RequestPanel/RequestPanel';
 import { ResponsePanel } from '../components/ResponsePanel/ResponsePanel';
@@ -108,6 +109,7 @@ export const RPCBuilder: React.FC = () => {
         // Record in history
         if (request) {
             appStore.addToHistory(request, status, duration);
+            appStore.pushLog(`Executed ${request.type === RequestType.RPC ? 'RPC' : 'PTB'} request: ${request.name}`, network, 'request');
         }
     };
 
@@ -120,7 +122,12 @@ export const RPCBuilder: React.FC = () => {
     if (!request) return null;
 
     return (
-        <div ref={containerRef} className="flex flex-col h-full overtxio-hidden bg-slate-950">
+        <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            ref={containerRef} 
+            className="flex flex-col h-full overflow-hidden bg-near-black"
+        >
             {/* Top half: Request Configuration */}
             <div className="flex-1 flex flex-col min-h-0">
                 <RequestPanel 
@@ -137,15 +144,16 @@ export const RPCBuilder: React.FC = () => {
             {/* Drag Handle */}
             <div 
                 onMouseDown={startDragging}
-                className="h-1.5 bg-slate-950 hover:bg-sui-600 cursor-row-resize transition-colors z-20 shrink-0 border-t border-b border-slate-800 flex items-center justify-center group"
+                className="h-1.5 bg-near-black hover:bg-electric-violet/50 cursor-row-resize transition-colors z-20 shrink-0 border-t border-b border-white/5 flex items-center justify-center group"
             >
-                <div className="w-8 h-0.5 bg-slate-700 group-hover:bg-white rounded-full transition-colors" />
+                <div className="w-12 h-0.5 bg-slate-800 group-hover:bg-soft-purple rounded-full transition-all duration-300 group-hover:w-24" />
             </div>
 
             {/* Bottom half: Response Inspection */}
-            <div 
-                style={{ height: responseHeight }}
-                className="min-h-0 shrink-0 flex flex-col shadow-[0_-4px_12px_rgba(0,0,0,0.3)] z-10"
+            <motion.div 
+                animate={{ height: responseHeight }}
+                transition={{ type: 'spring', damping: 30, stiffness: 300, mass: 0.8 }}
+                className="min-h-0 shrink-0 flex flex-col shadow-[0_-8px_20px_rgba(0,0,0,0.4)] z-10 bg-dark-indigo-glow"
             >
                 <ResponsePanel 
                     requestId={activeTabId || undefined}
@@ -157,7 +165,7 @@ export const RPCBuilder: React.FC = () => {
                     duration={duration}
                     endpoint={endpoint}
                 />
-            </div>
+            </motion.div>
 
             <SignTransactionModal 
                 isOpen={isSignModalOpen}
@@ -166,6 +174,6 @@ export const RPCBuilder: React.FC = () => {
                 walletAddress={connectedAddress}
                 request={request}
             />
-        </div>
+        </motion.div>
     );
 };

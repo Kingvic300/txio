@@ -51,14 +51,14 @@ export const WalletTab: React.FC<WalletTabProps> = ({
 
   if (!connectedAddress) {
     return (
-      <div className="flex-1 overtxio-y-auto p-4 custom-scrollbar space-y-6">
-        <div className="p-8 text-center border border-dashed border-white/10 rounded-xl bg-white/[0.02] relative overtxio-hidden group">
+      <div className="flex-1 overflow-y-auto p-4 custom-scrollbar space-y-6">
+        <div className="p-8 text-center border border-dashed border-white/10 rounded-xl bg-white/[0.02] relative overflow-hidden group">
           {/* Animated gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-sui-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
           
           <div className="relative z-10">
             <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-sui-500/20 to-cyan-500/20 flex items-center justify-center border border-white/10 shadow-lg shadow-sui-500/10">
-              <Wallet size={32} className="text-sui-400" />
+              <Wallet size={32} className="text-electric-violet" />
             </div>
             
             <h3 className="text-sm font-bold text-slate-200 mb-2">No Wallet Connected</h3>
@@ -68,7 +68,7 @@ export const WalletTab: React.FC<WalletTabProps> = ({
             
             {/* Custom styled ConnectButton */}
             <ConnectButton 
-              className="!w-full !bg-gradient-to-r !from-sui-600 !to-cyan-600 hover:!from-sui-500 hover:!to-cyan-500 !text-white !font-bold !py-3 !px-6 !rounded-xl !shadow-lg !shadow-sui-900/50 !transition-all !duration-300 hover:!scale-[1.02] hover:!shadow-xl hover:!shadow-sui-900/70 !border-0 !relative !overtxio-hidden group/btn"
+              className="!w-full !bg-gradient-to-r !from-sui-600 !to-cyan-600 hover:!from-sui-500 hover:!to-cyan-500 !text-white !font-bold !py-3 !px-6 !rounded-xl !shadow-lg !shadow-sui-900/50 !transition-all !duration-300 hover:!scale-[1.02] hover:!shadow-xl hover:!shadow-sui-900/70 !border-0 !relative !overflow-hidden group/btn"
               connectText={
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   <Wallet size={16} />
@@ -93,8 +93,8 @@ export const WalletTab: React.FC<WalletTabProps> = ({
         <div className="space-y-3">
           <div className="bg-white/[0.02] border border-white/5 rounded-lg p-3">
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-sui-500/10 flex items-center justify-center shrink-0">
-                <svg className="w-4 h-4 text-sui-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-8 h-8 rounded-lg bg-electric-violet/10 flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-electric-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
@@ -124,9 +124,9 @@ export const WalletTab: React.FC<WalletTabProps> = ({
   }
 
   return (
-    <div className="flex-1 overtxio-y-auto p-4 custom-scrollbar space-y-6">
-      <div className="bg-gradient-to-br from-[#111] via-[#0c0c0e] to-black rounded-xl p-5 border border-white/10 shadow-xl relative overtxio-hidden group">
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-sui-500/10 blur-[40px] rounded-full group-hover:bg-sui-500/20 transition-all duration-700"></div>
+    <div className="flex-1 overflow-y-auto p-4 custom-scrollbar space-y-6">
+      <div className="bg-gradient-to-br from-[#111] via-[#0c0c0e] to-black rounded-xl p-5 border border-white/10 shadow-xl relative overflow-hidden group">
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-electric-violet/10 blur-[40px] rounded-full group-hover:bg-electric-violet/20 transition-all duration-700"></div>
         
         <div className="relative z-10">
           <div className="flex justify-between items-start mb-4">
@@ -143,11 +143,11 @@ export const WalletTab: React.FC<WalletTabProps> = ({
             <div className="text-[10px] text-slate-500 font-mono mb-1">Balance</div>
             <div className="text-2xl font-mono font-bold text-white tracking-tight flex items-baseline gap-2">
               {loadingBalance ? <span className="animate-pulse">...</span> : (balance || '0.0000')}
-              <span className="text-xs text-sui-400 font-sans font-bold">SUI</span>
+              <span className="text-xs text-electric-violet font-sans font-bold">SUI</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 bg-black/40 rounded-lg p-1 border border-white/10 mb-2">
+          <div className="flex items-center gap-1 bg-near-black/40 rounded-lg p-1 border border-white/10 mb-2">
             <button 
               onClick={handleCopy} 
               className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded hover:bg-white/5 text-[10px] font-bold text-slate-400 hover:text-white transition-colors"

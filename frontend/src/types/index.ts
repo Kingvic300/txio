@@ -1,6 +1,6 @@
 export type Network = 'mainnet' | 'testnet' | 'devnet';
 
-export type FeatureId = 'dashboard' | 'rpc' | 'ptb' | 'move' | 'playground' | 'history' | 'settings' | 'new_request' | 'profile' | 'ai_chat' | 'runner';
+export type FeatureId = 'dashboard' | 'rpc' | 'ptb' | 'move' | 'playground' | 'history' | 'settings' | 'new_request' | 'profile' | 'ai_chat' | 'runner' | 'docs';
 
 export interface TabItem {
   id: string;
@@ -246,7 +246,7 @@ export interface TeamMember {
 
 export interface ActivityLog {
   id: string;
-  type: 'request' | 'team' | 'system';
+  type: 'request' | 'team' | 'system' | 'error';
   userName: string;
   action: string;
   target: string;

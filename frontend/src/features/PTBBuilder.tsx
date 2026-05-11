@@ -40,8 +40,8 @@ const Node: React.FC<NodeProps> = ({ node, onMouseDown }) => {
             </div>
             
             {/* Handles */}
-            {node.inputs && <div className="absolute left-0 top-1/2 -translate-x-1/2 w-3 h-3 bg-slate-200 rounded-full border-2 border-slate-800 hover:scale-125 transition-transform" />}
-            {node.outputs && <div className="absolute right-0 top-1/2 translate-x-1/2 w-3 h-3 bg-slate-200 rounded-full border-2 border-slate-800 hover:scale-125 transition-transform" />}
+            {node.inputs && <div className="absolute left-0 top-1/2 -translate-x-1/2 w-3 h-3 bg-slate-200 rounded-full border-2 border-white/5 hover:scale-125 transition-transform" />}
+            {node.outputs && <div className="absolute right-0 top-1/2 translate-x-1/2 w-3 h-3 bg-slate-200 rounded-full border-2 border-white/5 hover:scale-125 transition-transform" />}
         </div>
     );
 };
@@ -79,7 +79,7 @@ export const PTBBuilder: React.FC = () => {
     // Draw SVG Connections
     const renderConnections = () => {
         return (
-            <svg className="absolute inset-0 w-full h-full pointer-events-none overtxio-visible">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
                 {/* Mock connections based on hardcoded IDs for demo visual fidelity */}
                 <path d="M 292 150 C 342 150, 342 150, 400 150" stroke="#475569" strokeWidth="2" fill="none" className="animate-pulse" />
                 <path d="M 592 150 C 650 150, 650 100, 700 100" stroke="#475569" strokeWidth="2" fill="none" />
@@ -89,17 +89,17 @@ export const PTBBuilder: React.FC = () => {
     };
 
     return (
-        <div className="flex h-full bg-slate-950">
+        <div className="flex h-full bg-near-black">
             {/* Toolbar */}
-            <div className="w-12 bg-slate-900 border-r border-slate-800 flex flex-col items-center py-4 gap-4 z-10">
+            <div className="w-12 bg-dark-indigo-glow border-r border-white/5 flex flex-col items-center py-4 gap-4 z-10">
                 <button onClick={() => appStore.showToast('Adding Object not implemented', 'info')} className="p-2 bg-blue-900/30 text-blue-400 rounded hover:bg-blue-900/50" title="Add Object"><Coins size={20}/></button>
-                <button onClick={() => appStore.showToast('Adding Move Call not implemented', 'info')} className="p-2 text-slate-500 hover:text-white hover:bg-slate-800 rounded" title="Move Call"><Layers size={20}/></button>
-                <button onClick={() => appStore.showToast('Adding Split Coins not implemented', 'info')} className="p-2 text-slate-500 hover:text-white hover:bg-slate-800 rounded" title="Split Coins"><Plus size={20}/></button>
+                <button onClick={() => appStore.showToast('Adding Move Call not implemented', 'info')} className="p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded" title="Move Call"><Layers size={20}/></button>
+                <button onClick={() => appStore.showToast('Adding Split Coins not implemented', 'info')} className="p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded" title="Split Coins"><Plus size={20}/></button>
             </div>
 
             {/* Canvas */}
             <div 
-                className="flex-1 relative overtxio-hidden dot-grid"
+                className="flex-1 relative overflow-hidden dot-grid"
                 ref={canvasRef}
                 onMouseMove={handleMouseMove}
                 onMouseUp={() => setDraggingId(null)}
@@ -116,8 +116,8 @@ export const PTBBuilder: React.FC = () => {
                 ))}
 
                 {/* Floating Action */}
-                <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur border border-slate-700 p-2 rounded-lg flex gap-2">
-                    <button onClick={() => appStore.showToast('Dry Run simulation started (Mock)', 'success')} className="bg-sui-600 hover:bg-sui-500 text-white px-4 py-1.5 rounded text-xs font-bold flex items-center gap-2">
+                <div className="absolute top-4 right-4 bg-dark-indigo-glow/80 backdrop-blur border border-white/10 p-2 rounded-lg flex gap-2">
+                    <button onClick={() => appStore.showToast('Dry Run simulation started (Mock)', 'success')} className="bg-electric-violet hover:bg-electric-violet text-white px-4 py-1.5 rounded text-xs font-bold flex items-center gap-2">
                         <Play size={14} fill="currentColor" /> Dry Run
                     </button>
                 </div>

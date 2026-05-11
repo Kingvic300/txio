@@ -98,7 +98,7 @@ export const ResponsePanel: React.FC<ResponsePanelProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col bg-black border-t border-white/10">
+    <div className="h-full flex flex-col bg-near-black border-t border-white/10">
       <ResponseHeader
         isError={isError}
         duration={duration}
@@ -115,7 +115,7 @@ export const ResponsePanel: React.FC<ResponsePanelProps> = ({
         onTabChange={setActiveTab}
       />
 
-      <div className="flex-1 overtxio-auto bg-[#0a0a0a] p-6 custom-scrollbar">
+      <div className="flex-1 overflow-auto bg-dark-indigo-glow p-6 custom-scrollbar">
         {renderContent()}
       </div>
     </div>
