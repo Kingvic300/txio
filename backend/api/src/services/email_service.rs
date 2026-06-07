@@ -17,8 +17,15 @@ impl EmailService {
     }
 
     pub async fn send_otp_email(&self, email: &str, otp: &str) -> Result<(), AppError> {
+        // Brevo only sends from verified senders, so the from-address must be
+        // configurable per deployment instead of a hardcoded domain.
+        let from_email = std::env::var("EMAIL_FROM")
+            .unwrap_or_else(|_| "no-reply@txio-backend.com".to_string());
+        let from_name =
+            std::env::var("EMAIL_FROM_NAME").unwrap_or_else(|_| "txio Team".to_string());
+
         let body = json!({
-            "sender": { "email": "no-reply@txio-backend.com", "name": "txio Team" },
+            "sender": { "email": from_email, "name": from_name },
             "to": [{ "email": email }],
             "subject": "Your txio OTP",
             "htmlContent": format!("<p>Your verification code is: <strong>{}</strong></p><p>This code will expire in 10 minutes.</p>", otp)
