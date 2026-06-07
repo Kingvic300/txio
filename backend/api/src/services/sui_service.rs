@@ -33,7 +33,10 @@ impl SuiService {
     pub fn new(rpc_repo: RpcRepository, _rpc_url: String) -> Self {
         Self {
             rpc_repo,
-            client: Client::new(),
+            client: Client::builder()
+                .timeout(std::time::Duration::from_secs(30))
+                .build()
+                .unwrap_or_else(|_| Client::new()),
         }
     }
 

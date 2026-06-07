@@ -32,7 +32,10 @@ impl SorobanAdapter {
         });
 
         Self {
-            client: Client::new(),
+            client: Client::builder()
+                .timeout(std::time::Duration::from_secs(30))
+                .build()
+                .unwrap_or_else(|_| Client::new()),
             rpc_url: url,
         }
     }

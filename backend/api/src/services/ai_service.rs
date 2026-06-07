@@ -63,7 +63,10 @@ impl AiService {
         let model = resolve_model();
 
         Self {
-            client: Client::new(),
+            client: Client::builder()
+                .timeout(std::time::Duration::from_secs(30))
+                .build()
+                .unwrap_or_else(|_| Client::new()),
             api_keys: Arc::new(api_keys),
             model,
             next_key_index: Arc::new(AtomicUsize::new(0)),
