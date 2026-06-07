@@ -274,7 +274,10 @@ impl CommandHandler {
             password,
         };
 
-        let client = reqwest::Client::new();
+        let client = reqwest::Client::builder()
+            .timeout(std::time::Duration::from_secs(30))
+            .build()
+            .unwrap_or_else(|_| reqwest::Client::new());
         let api_url =
             std::env::var("API_URL").unwrap_or_else(|_| "http://localhost:8000".to_string());
 
