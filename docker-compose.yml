@@ -12,15 +12,15 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: txio-api
+    # Secrets (JWT_SECRET, BREVO_API_KEY, GROQ_API_KEYS, ...) come from this
+    # untracked file. Copy .env.example to backend/api/.env and fill it in.
+    # The API fails fast if JWT_SECRET is missing or <32 chars (see config.rs).
     env_file:
       - ./backend/api/.env
     environment:
       MONGO_URI: mongodb://mongodb:27017/txio
       RUST_LOG: info
-      JWT_SECRET: dev-secret-key-at-least-32-chars-long-12345
-      BREVO_API_KEY: dummy-key
       PORT: 8000
-      SUI_CLI_EMAIL: dev@txio.io
     ports:
       - "8000:8000"
     depends_on:
